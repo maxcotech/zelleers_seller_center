@@ -14,6 +14,23 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavDropdown',
+    name: 'Products',
+    route: '/product',
+    icon: 'cil-puzzle',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Create Product',
+        to: '/product/create',
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
+      }
+    ]
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
     name: 'Store Settings',
     route: '/store',
     icon: 'cil-settings',

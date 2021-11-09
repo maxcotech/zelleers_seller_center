@@ -102,19 +102,18 @@ export const loginUser = (data,onComplete = null) => {
     }
 }
 
-export const logoutUser = (onComplete = null) => {
+export const setLogoutUser = () => {
+    return {
+        type:AUTH_ACTION_TYPES.logoutUser
+    }
+}
+
+export const logoutUser = () => {
     return (dispatch) => {
         axios.delete(`${BASE_URL}user/logout`)
         .then((result) => {
             if(result.data?.status === 'success'){
-                setUserData({
-                    stores:[],
-                    current_store:null,
-                    logged_in:false,
-                    user:null
-                },dispatch).then(() => {
-                    if(onComplete) onComplete();
-                })
+                dispatch(setLogoutUser());
             } else {
                 (result.data?.message)? 
                     handleArrayMessage(result.data.message,toast.error):

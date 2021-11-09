@@ -1,10 +1,12 @@
 import {toast} from "react-toastify";
+import { handleArrayMessage } from "./message_helpers";
 
 export const handleAxiosError = (ex,callback = null) => {
     if(callback) callback();
     if(ex){
         if(ex.response?.data){
-            toast.error(ex.response.data.message ?? "sorry, unknown error occurred.");
+            handleArrayMessage(ex.response.data.message ?? "sorry, unknown error occurred.",toast.error,"\n" );
+            //toast.error(ex.response.data.message ?? );
             return;
         }
     }

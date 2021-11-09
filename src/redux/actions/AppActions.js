@@ -6,3 +6,10 @@ export const setLoading = (val) => {
         payload:val
     }
 }
+
+export const setSideBarStatus = (data) => {
+    return {
+        type:APP_ACTION_TYPES.setSideBarStatus,
+        payload:data
+    }
+}

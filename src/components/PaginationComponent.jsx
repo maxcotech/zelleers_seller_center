@@ -1,5 +1,5 @@
 import {Pagination,PaginationLink,PaginationItem} from "reactstrap";
-
+import PropTypes from "prop-types";
 
 const PaginationComponent = (props) => {
     const {links,onClick} = props;
@@ -29,6 +29,11 @@ const PaginationComponent = (props) => {
     } else {
         return <></>
     }
+}
+
+PaginationComponent.propTypes = {
+    links:PropTypes.array.isRequired,
+    onClick:PropTypes.func.isRequired
 }
 
 export default PaginationComponent;
