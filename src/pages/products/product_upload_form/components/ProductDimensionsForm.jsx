@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setProductAttribute } from "src/redux/actions/CurrentProductActions";
 
-const ProductDimensionsForm = () => {
+const ProductDimensionsForm = (props) => {
 
     const dispatch = useDispatch();
     const current_product = useSelector(state => state.current_product);
@@ -19,6 +19,7 @@ const ProductDimensionsForm = () => {
                 <CRow>
                     <CCol lg={{offset:2,size:8}}>
                         <div>
+                            <form ref={props.dimensionsFormRef}>
                             <CAlert color="info">
                                 Here it's either you select weight, or select length, height and width ( you can still select all if you wish).
                             </CAlert>
@@ -39,6 +40,7 @@ const ProductDimensionsForm = () => {
                                 <CLabel>Product Length</CLabel>
                                 <input  className="form-control" type="number" ref={lengthRef}  onBlur={e => dispatch(setProductAttribute(e.target.value,'dimension_length'))} placeholder="Enter Length in inches." />
                             </CFormGroup>
+                            </form>
                         </div>
                     </CCol>
                 </CRow>

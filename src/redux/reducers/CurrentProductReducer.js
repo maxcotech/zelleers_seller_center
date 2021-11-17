@@ -31,6 +31,12 @@ const CurrentProductReducer = (state = initState, action) => {
     switch(action.type){
         case CURRENT_PRODUCT_TYPE.setCurrentProduct:
             return {...state,...action.payload};
+        case CURRENT_PRODUCT_TYPE.setCurrentProductVariations:
+            return {...state,variations:action.payload};
+        case CURRENT_PRODUCT_TYPE.updateVariationOption:
+            return { ...state };
+        case CURRENT_PRODUCT_TYPE.reset:
+            return {...initState};
         default: return state;
     }
 }

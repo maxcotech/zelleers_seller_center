@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import FileUploadComponent from "src/components/FileUploadComponent";
 import { setProductAttribute, uploadMainProductImage } from "src/redux/actions/CurrentProductActions";
-import ProductCategorySelect from "./ProductCategorySelect";
+import ProductCategorySelect from "../../components/ProductCategorySelect";
 
-const ProductFrontForm = () => {
+const ProductFrontForm = (props) => {
     const dispatch = useDispatch();
     const current_product = useSelector(state => state.current_product);
     const productNameRef = useRef(current_product.product_name ?? "");
@@ -29,21 +29,22 @@ const ProductFrontForm = () => {
                     </CCol>
                     <CCol lg={{size:8}}>
                         <div>
+                            <form ref={props.productFrontFormRef}>
                             <CFormGroup>
                                 <CLabel>Product Name<span className="text-danger">*</span></CLabel>
-                                <input  className="form-control" ref={productNameRef} placeholder="Eg: Apple Macbook Pro 2021 mi" />
+                                <input onBlur={(e) => dispatch(setProductAttribute(e.target.value,"product_name"))}  className="form-control" ref={productNameRef} placeholder="Eg: Apple Macbook Pro 2021 mi" />
                             </CFormGroup>
                             <CFormGroup>
                                 <CLabel>Regular Price<span className="text-danger">*</span></CLabel>
-                                <input  className="form-control" type="number" ref={regularPriceRef} placeholder="Enter regular price" />
+                                <input onBlur={(e) => dispatch(setProductAttribute(e.target.value,"regular_price"))}  className="form-control" type="number" ref={regularPriceRef} placeholder="Enter regular price" />
                             </CFormGroup>
                             <CFormGroup>
                                 <CLabel>Sales Price</CLabel>
-                                <input  className="form-control" type="number" ref={salesPriceRef} placeholder="Enter sales price" />
+                                <input onBlur={(e) => dispatch(setProductAttribute(e.target.value,"sales_price"))}  className="form-control" type="number" ref={salesPriceRef} placeholder="Enter sales price" />
                             </CFormGroup>
                             <CFormGroup>
                                 <CLabel>Amount In Stock</CLabel>
-                                <input  className="form-control" type="number" ref={amountInStockRef} placeholder="Enter Amount of product in stock" />
+                                <input onBlur={(e) => dispatch(setProductAttribute(e.target.value,"amount_in_stock"))}  className="form-control" type="number" ref={amountInStockRef} placeholder="Enter Amount of product in stock" />
                             </CFormGroup>
                             <CFormGroup>
                                 <CLabel>Category</CLabel>
@@ -65,7 +66,7 @@ const ProductFrontForm = () => {
                                     />
                                 </CInputGroup>
                             </CFormGroup>
-                            
+                            </form>
                         </div>
                     </CCol>
                 </CRow>

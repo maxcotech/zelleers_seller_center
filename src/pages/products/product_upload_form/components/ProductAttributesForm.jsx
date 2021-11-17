@@ -5,11 +5,11 @@ import { useDispatch } from "react-redux";
 import AppModal from "src/components/AppModal";
 import { searchBrands, createBrand } from "src/redux/actions/BrandActions";
 import { setProductAttribute } from "src/redux/actions/CurrentProductActions";
-import BrandForm from "./BrandForm";
-import BrandSearchTable from "./BrandSearchTable";
+import BrandForm from "../../components/BrandForm";
+import BrandSearchTable from "../../components/BrandSearchTable";
 
 
-const ProductAttributesForm = () => {
+const ProductAttributesForm = (props) => {
    const dispatch = useDispatch();
    const current_product = useSelector(state => state.current_product);
    const brandRef = useRef();
@@ -39,6 +39,7 @@ const ProductAttributesForm = () => {
            <CCardBody>
                 <CRow>
                     <CCol lg={{offset:2,size:8}}>
+                        <form ref={props.otherAttributesFormRef}>
                         <CFormGroup>
                             <CLabel>Youtube Video</CLabel>
                             <input 
@@ -65,6 +66,7 @@ const ProductAttributesForm = () => {
                                 onSelectBrand={onSelectBrand}
                                 list={brandList} />
                         </CFormGroup>
+                        </form>
                     </CCol>
                 </CRow>
            </CCardBody>

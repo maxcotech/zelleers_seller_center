@@ -7,6 +7,7 @@ import CountryReducer from "./CountryReducer";
 import CurrentProductReducer from "./CurrentProductReducer";
 import StaffTokenReducer from "./StaffTokenReducer";
 import StoreReducer from "./StoreReducer";
+import VariationOptionReducer from "./VariationOptionReducer";
 
 const appReducers = combineReducers({
     auth:AuthReducer,
@@ -15,7 +16,8 @@ const appReducers = combineReducers({
     country:CountryReducer,
     staff_token:StaffTokenReducer,
     current_product:CurrentProductReducer,
-    category:CategoryReducer
+    category:CategoryReducer,
+    variation_option:VariationOptionReducer
 });
 
 const rootReducers = (state,action) => {

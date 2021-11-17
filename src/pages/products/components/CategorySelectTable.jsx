@@ -20,7 +20,7 @@ const CategorySelectTable = (props) => {
                         {
                             props.categories.map((item,index) => {
                                 return (
-                                    <tr className="hoverable" >
+                                    <tr key={index} className="hoverable" >
                                         <td>{index + 1}</td>
                                         <td><CircleAvatar radius={30} src={item.category_icon} /></td>
                                         <td>{item.category_title}</td>

@@ -3,6 +3,7 @@ import { toast } from "react-toastify"
 import { BASE_URL } from "src/config/constants/app_constants"
 import { removeIrrelevantAttributes } from "src/config/helpers/array_helpers"
 import { handleAxiosError } from "src/config/helpers/http_helpers"
+import { confirmAction } from "src/config/helpers/message_helpers"
 import { CURRENT_PRODUCT_TYPE } from "../action_types/CurrentProductType"
 import { setLoading } from "./AppActions"
 
@@ -33,6 +34,13 @@ export const setCurrentProduct = (data) => {
     return {
         type:CURRENT_PRODUCT_TYPE.setCurrentProduct,
         payload:data
+    }
+}
+
+export const setCurrentProductVariations = (variations) => {
+    return {
+        type:CURRENT_PRODUCT_TYPE.setCurrentProductVariations,
+        payload:variations
     }
 }
  
@@ -105,5 +113,70 @@ export const uploadGalleryImage = (image_file,label,setILoading) => {
             setILoading? setILoading(false): dispatch(setLoading(false));
             handleAxiosError(ex);
         })
+    }
+}
+
+export const uploadProductVariationImage = (file,variation,iloading = null,onComplete = null) => {
+    return (dispatch,getState) => {
+        iloading? iloading(true):dispatch(setLoading(true));
+        const state = getState();
+        const formData = new FormData();
+        formData.append('image_file',file);
+        if(state.current_store?.id !== null) formData.append('store_id',state.current_store?.id);
+        if(variation.variation_image_url !== "") formData.append('old_image_url',variation.variation_image_url); 
+        if(typeof variation.id !== "undefined") formData.append('variation_id',variation.id);
+        axios.post(`${BASE_URL}product/variation_image`,formData)
+        .then((result) => {
+            iloading? iloading(false):dispatch(setLoading(false));
+            if(result.data?.status === "success"){
+                if(onComplete) onComplete(result.data.data);
+            } else {
+                toast.error(result.data?.message ?? "An Error Occurred.");
+            }
+        })
+        .catch((ex) => {
+            iloading? iloading(false):dispatch(setLoading(false));
+            handleAxiosError(ex);
+        })
+
+    }
+}
+
+export const resetCurrentProduct = () => {
+    return {
+        type:CURRENT_PRODUCT_TYPE.reset,
+        payload:{}
+    }
+}
+
+
+
+export const uploadCurrentProduct = (onComplete = null) => {
+    return async (dispatch,getState) => {
+        const state = getState();
+        const currentProduct = state.current_product;
+        currentProduct.store_id = state.store.current_store?.id;
+        if(typeof currentProduct.store_id === "undefined") return;
+        dispatch(setLoading(true));
+        let result = null;
+        try{
+            if(currentProduct.id === null){
+               result = await axios.post(`${BASE_URL}product`,currentProduct);
+            } else {
+               result = await axios.put(`${BASE_URL}product`,currentProduct);
+            }
+            dispatch(setLoading(false));
+            if(result.data?.status === "success"){
+                toast.success(result.data.message);
+                if(onComplete) onComplete();
+            } else {
+                toast.error(result.data?.message ?? "An Error Occurred.");
+            }
+        }
+        catch(ex){
+            dispatch(setLoading(false));
+            handleAxiosError(ex)
+        }
+        
     }
 }

@@ -43,7 +43,7 @@ const StaffTokens = React.lazy(() => import('./pages/store/staff_tokens/StaffTok
 const SelectStore = React.lazy(() => import('./pages/store/select_store/SelectStore'));
 const Products = React.lazy(() => import('./pages/products/Products'));
 const JoinStore =  React.lazy(() => import('./pages/store/join_store/JoinStore'));
-const CreateProduct = React.lazy(() => import('./pages/products/create_products/CreateProduct'));
+const CreateProduct = React.lazy(() => import('./pages/products/product_upload_form/ProductUploadForm'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },

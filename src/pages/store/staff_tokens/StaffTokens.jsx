@@ -31,8 +31,8 @@ const StaffTokens = () => {
         <>
         <CCard>
             <CCardHeader>
-                <b><Spinner status={loading} /> Staff Tokens</b>
-                <div className="card-header-actions">
+                <h4 style={{display:"inline-block"}}><Spinner status={loading} /> Staff Tokens</h4>
+                <div style={{display:"inline-block"}} className="card-header-actions">
                     <CButton onClick={() => setVisibleModal(true)} color="primary">+ New Token</CButton>
                 </div>
             </CCardHeader>
