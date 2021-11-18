@@ -6,7 +6,8 @@ export const removeIrrelevantAttributes = (data,attributes = []) => {
             if(!attributes.includes(key)){
                 newData[key] = data[key];
             }
-        })
+        });
+        return newData;
     } else {
         return data;
     }

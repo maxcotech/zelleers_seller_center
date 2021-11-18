@@ -9,7 +9,7 @@ const initState = {
     description:null,
     amount_in_stock:null,
     category_id:null,
-    main_product_image:null,
+    product_image:null,
     brand_id:null,
     weight:null,
     front_image:null,

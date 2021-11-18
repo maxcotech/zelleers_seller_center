@@ -10,7 +10,7 @@ const LoadingBtn = (props) => {
     }
 
     return (
-        <CButton block={props.block ?? false} color={props.color ?? "primary"} onClick={onClick}>
+        <CButton disabled={loading} block={props.block ?? false} color={props.color ?? "primary"} onClick={onClick}>
             <Spinner color={props.color == "light" ? "dark" : "light"} status={props.status ?? loading} /> {props.children}
         </CButton>
     )
@@ -19,7 +19,8 @@ const LoadingBtn = (props) => {
 LoadingBtn.propTypes = {
     onClick:PropTypes.func,
     data:PropTypes.any,
-    color:PropTypes.string
+    color:PropTypes.string,
+    onComplete:PropTypes.func
 }
 
 export default LoadingBtn;

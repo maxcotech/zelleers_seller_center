@@ -1,5 +1,5 @@
-import { CAlert, CCard, CCardBody, CCol, CFormGroup, CInput, CLabel, CRow } from "@coreui/react";
-import { useRef } from "react";
+import { CAlert, CCard, CCardBody, CCol, CFormGroup, CLabel, CRow } from "@coreui/react";
+import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setProductAttribute } from "src/redux/actions/CurrentProductActions";
@@ -12,6 +12,13 @@ const ProductDimensionsForm = (props) => {
     const heightRef = useRef(current_product.dimension_height ?? "");
     const widthRef = useRef(current_product.dimension_width ?? "");
     const lengthRef = useRef(current_product.dimension_length ?? "");
+
+    useEffect(() => {
+        weightRef.current.value = current_product.weight;
+        heightRef.current.value = current_product.dimension_height;
+        widthRef.current.value = current_product.dimension_width;
+        lengthRef.current.value = current_product.dimension_length;
+    },[current_product.id])
 
     return (
         <CCard>

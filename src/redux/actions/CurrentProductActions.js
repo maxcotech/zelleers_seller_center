@@ -3,20 +3,21 @@ import { toast } from "react-toastify"
 import { BASE_URL } from "src/config/constants/app_constants"
 import { removeIrrelevantAttributes } from "src/config/helpers/array_helpers"
 import { handleAxiosError } from "src/config/helpers/http_helpers"
-import { confirmAction } from "src/config/helpers/message_helpers"
 import { CURRENT_PRODUCT_TYPE } from "../action_types/CurrentProductType"
 import { setLoading } from "./AppActions"
 
-export const setWholeCurrentProduct = (payload) => {
+export const setWholeCurrentProduct = (payload,onComplete = null) => {
     let data = {...payload};
     const galleryImageLabels = ['front_image','back_image','side_image','fourth_image','fifth_image'];
     galleryImageLabels.forEach((item) => {
         data = appendGalleryImageUrl(data,item);
     })
     data = appendCategoryAndBrandNames(data);
-    data = removeIrrelevantAttributes(data,['images','category','brand'])
+    data = removeIrrelevantAttributes(data,['images','category','brand']);
+    console.log('inside set whole product ',data);
     return (dispatch) => {
         dispatch(setCurrentProduct(data));
+        if(onComplete) onComplete();
     }
 }
 
@@ -74,12 +75,12 @@ export const uploadMainProductImage = (image_file,setILoading = null) => {
         fdata.append('image_file',image_file);
         fdata.append('store_id',state.store.current_store?.id);
         if(state.current_product?.id !== null) fdata.append('product_id',state.current_product.id);
-        if(state.current_product?.main_product_image !== null) fdata.append('old_image_url',state.current_product.main_product_image);
+        if(state.current_product?.product_image !== null) fdata.append('old_image_url',state.current_product.product_image);
         axios.post(`${BASE_URL}product/image`,fdata)
         .then((result) => {
             setILoading? setILoading(false):dispatch(setLoading(false));
             if(result.data?.status === "success"){
-                dispatch(setProductAttribute(result.data.data?.image_full_path,"main_product_image"))
+                dispatch(setProductAttribute(result.data.data?.image_full_path,"product_image"))
             } else {
                 toast.error(result.data?.message ?? "An Error occurred");
             }
@@ -163,6 +164,7 @@ export const uploadCurrentProduct = (onComplete = null) => {
             if(currentProduct.id === null){
                result = await axios.post(`${BASE_URL}product`,currentProduct);
             } else {
+               currentProduct.product_id = currentProduct.id;
                result = await axios.put(`${BASE_URL}product`,currentProduct);
             }
             dispatch(setLoading(false));

@@ -44,6 +44,8 @@ const SelectStore = React.lazy(() => import('./pages/store/select_store/SelectSt
 const Products = React.lazy(() => import('./pages/products/Products'));
 const JoinStore =  React.lazy(() => import('./pages/store/join_store/JoinStore'));
 const CreateProduct = React.lazy(() => import('./pages/products/product_upload_form/ProductUploadForm'));
+const ProductTable = React.lazy(() => import('./pages/products/product_table/ProductTable'));
+
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -55,9 +57,8 @@ const routes = [
 
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: "/store/select", name: 'Choose Store', component: SelectStore },
-  { path: "/products", name: 'Products', component: Products },
+  { path: "/products", name: 'Products', component: ProductTable},
   { path: "/product/create", name: 'Create Product', component: CreateProduct },
-
 
   { path: '/logout', name: 'Log out', component: Logout },
 

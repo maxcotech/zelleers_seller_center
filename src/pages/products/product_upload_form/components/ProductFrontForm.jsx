@@ -1,5 +1,5 @@
 import { CButton, CCard, CCardBody, CCol, CFormGroup, CInput, CInputGroup, CInputGroupPrepend, CLabel, CRow} from "@coreui/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import FileUploadComponent from "src/components/FileUploadComponent";
@@ -13,7 +13,15 @@ const ProductFrontForm = (props) => {
     const regularPriceRef = useRef(current_product.regular_price ?? "");
     const salesPriceRef = useRef(current_product.sales_price ?? "");
     const amountInStockRef = useRef(current_product.amount_in_stock ?? "");
-    const categoryRef = useRef(current_product.category_name ?? "")
+    const categoryRef = useRef(current_product.category_title ?? "")
+
+    useEffect(() => {
+        productNameRef.current.value = current_product.product_name;
+        regularPriceRef.current.value = current_product.regular_price;
+        salesPriceRef.current.value = current_product.sales_price;
+        amountInStockRef.current.value = current_product.amount_in_stock;
+        categoryRef.current.value = current_product.category_title;
+    },[current_product.id])
 
     return (
         <CCard>
@@ -24,7 +32,7 @@ const ProductFrontForm = (props) => {
                             id="product_image"
                             onFileChanged={(file,loader) => dispatch(uploadMainProductImage(file,loader))}
                             caption="Main Image"
-                            file_path={current_product.main_product_image}
+                            file_path={current_product.product_image}
                         />
                     </CCol>
                     <CCol lg={{size:8}}>

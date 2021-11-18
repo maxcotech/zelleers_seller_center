@@ -1,5 +1,5 @@
 import {CCard,CCardBody,CRow,CCol,CFormGroup,CInput,CLabel} from "@coreui/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import AppModal from "src/components/AppModal";
@@ -17,6 +17,7 @@ const ProductAttributesForm = (props) => {
    const youtubeVideoRef = useRef(current_product.youtube_video_id ?? "");
    const [brandList,setBrandList] = useState([])
    const [modalVisible,setModalVisible] = useState(false);
+   
    var handler = null;
    const onProposeBrand = (fdata) => {
         dispatch(createBrand(fdata,() => setModalVisible(false)));
@@ -32,6 +33,11 @@ const ProductAttributesForm = (props) => {
         brandRef.current.value = item.brand_name;
         setBrandList([]);
    }
+   useEffect(() => {
+        brandRef.current.value = current_product.brand_name;
+        skuRef.current.value = current_product.product_sku;
+        youtubeVideoRef.current.value = current_product.youtube_video_id;
+   },[current_product.id])
 
    return (
        <>

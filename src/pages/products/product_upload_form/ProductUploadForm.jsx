@@ -1,5 +1,5 @@
 import { CButton, CButtonGroup, CCard, CCardBody, CCardHeader, CNav, CNavItem, CNavLink, CTabContent, CTabPane, CTabs } from "@coreui/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "src/components/Spinner";
 import { confirmAction } from "src/config/helpers/message_helpers";
@@ -10,8 +10,9 @@ import ProductDimensionForm from "./components/ProductDimensionsForm";
 import ProductFrontForm from "./components/ProductFrontForm";
 import ProductGalleryForm from "./components/ProductGalleryForm";
 import ProductVariationForm from "./components/ProductVariationForm";
+import PropTypes from "prop-types";
 
-const ProductUploadForm = () => {
+const ProductUploadForm = (props) => {
     const dispatch = useDispatch();
     const loading = useSelector(state => state.app.loading);
     const currentProduct = useSelector(state => state.current_product);
@@ -48,11 +49,11 @@ const ProductUploadForm = () => {
     return (
         <CCard>
             <CCardHeader>
-                <h4 style={{display:"inline-block"}}><Spinner status={loading} /> Create Product</h4>
+                <h4 style={{display:"inline-block"}}><Spinner status={loading} /> {props.formTitle ?? "Create Product"}</h4>
                 <div style={{display:"inline-block"}} className="card-header-actions">
                     <CButtonGroup>
                         <CButton onClick={() => clearCurrentProduct()} color="danger">Reset</CButton>
-                        <CButton onClick={() => dispatch(uploadCurrentProduct(() => silentlyClearCurrentProduct()))} color="primary">Publish</CButton>
+                        <CButton onClick={() => dispatch(uploadCurrentProduct(() => silentlyClearCurrentProduct()))} color="primary">{props.uploadBtnTitle ?? "Publish"}</CButton>
                     </CButtonGroup>
                 </div>
             </CCardHeader>
@@ -114,6 +115,12 @@ const ProductUploadForm = () => {
             </CCardBody>
         </CCard>
     )
+}
+
+ProductUploadForm.propTypes = {
+    formTitle:PropTypes.string,
+    uploadBtnTitle:PropTypes.string,
+    updateMode:PropTypes.bool
 }
 
 export default ProductUploadForm;

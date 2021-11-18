@@ -26,6 +26,15 @@ const _nav =  [
           text:"NEW",
           color:"success"
         }
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'View Products',
+        to: '/products',
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
       }
     ]
   },
