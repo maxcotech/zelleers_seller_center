@@ -60,7 +60,7 @@ const StoreStaffs = () => {
                     store_staffs.length > 0? 
                     <>
                         <div className="table-responsive">
-                            <table className="table condensed">
+                            <table className="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>S/N</th>
