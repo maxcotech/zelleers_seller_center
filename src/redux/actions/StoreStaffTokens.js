@@ -14,17 +14,28 @@ export const setStaffTokens = (payload) => {
     }
 }
 
+export const setCurrentLink = (link) => {
+    return {
+        type:STAFF_TOKEN_ACTION_TYPES.setCurrentLink,
+        payload:link
+    }
+}
+
+
+
 export const fetchStaffTokens = (url = null) => {
     return (dispatch,getState) => {
         const state = getState();
         dispatch(setLoading(true));
-        axios.get(url ?? `${BASE_URL}store/staff/tokens`,{params:{
+        const restPath = url ?? `${BASE_URL}store/staff/tokens`;
+        axios.get(restPath,{params:{
             store:state.store?.current_store?.id
         }})
         .then((result) => {
             dispatch(setLoading(false));
             if(result.data?.status === "success"){
                 dispatch(setStaffTokens(result.data.data));
+                dispatch(setCurrentLink(restPath));
             } else {
                 toast.error(result.data?.message ?? "An Error Occurred.")
             }
@@ -47,7 +58,7 @@ export const createStaffTokens = (data,onComplete = null) => {
         .then((result) => {
             dispatch(setLoading(false));
             if(result.data?.status === "success"){
-                dispatch(fetchStaffTokens());
+                dispatch(fetchStaffTokens(state.staff_token.current_link));
                 toast.success("Successfully created staff token(s).");
                 if(onComplete) onComplete();
             } else {
@@ -62,14 +73,15 @@ export const createStaffTokens = (data,onComplete = null) => {
 }
 
 export const toggleStaffTokenExpiry = (id,setInnerLoading = null) => {
-    return (dispatch) => {
+    return (dispatch,getState) => {
         setInnerLoading? setInnerLoading(true):dispatch(setLoading(true));
+        const state = getState();
         axios.patch(`${BASE_URL}store/staff/token/${id}/toggle_expiry`)
         .then((result) => {
             setInnerLoading? setInnerLoading(false):dispatch(setLoading(false));
             if(result.data?.status === "success"){
                 toast.success(result.data?.message);
-                dispatch(fetchStaffTokens())
+                dispatch(fetchStaffTokens(state.staff_token.current_link))
             } else {
                 toast.error(result.data?.message ?? "An Error Occurred.");
             }
@@ -82,15 +94,16 @@ export const toggleStaffTokenExpiry = (id,setInnerLoading = null) => {
 }
 
 export const deleteStaffToken = (id,setInnerLoading = null) => {
-    return (dispatch) => {
+    return (dispatch,getState) => {
         confirmAction({text:"This store token will be permanently deleted."}).then((confirmed) => {
             if(confirmed){
                 setInnerLoading? setInnerLoading(true):dispatch(setLoading(true));
+                const state = getState();
                 axios.delete(`${BASE_URL}store/staff/token/${id}`)
                 .then((result) => {
                     setInnerLoading? setInnerLoading(false):dispatch(setLoading(false));
                     if(result.data?.status === "success"){
-                        dispatch(fetchStaffTokens());
+                        dispatch(fetchStaffTokens(state.staff_token.current_link));
                         toast.success('Staff token deleted successfully.');
                     } else {
                         toast.error(result.data?.message ?? "An Error Occurred.")

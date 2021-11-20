@@ -64,6 +64,15 @@ const _nav =  [
       },
       {
         _tag:'CSidebarNavItem',
+        name: 'Store Staffs',
+        to: '/store/staffs',
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
+      },
+      {
+        _tag:'CSidebarNavItem',
         name: 'Store Staff Tokens',
         to: '/store/staff-tokens',
         badge: {

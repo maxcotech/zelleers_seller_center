@@ -8,6 +8,7 @@ import CurrentProductReducer from "./CurrentProductReducer";
 import ProductReducer from "./ProductReducer";
 import StaffTokenReducer from "./StaffTokenReducer";
 import StoreReducer from "./StoreReducer";
+import StoreStaffReducer from "./StoreStaffReducer";
 import VariationOptionReducer from "./VariationOptionReducer";
 
 const appReducers = combineReducers({
@@ -19,7 +20,8 @@ const appReducers = combineReducers({
     current_product:CurrentProductReducer,
     category:CategoryReducer,
     variation_option:VariationOptionReducer,
-    product:ProductReducer
+    product:ProductReducer,
+    store_staff:StoreStaffReducer
 });
 
 const rootReducers = (state,action) => {

@@ -10,3 +10,9 @@ export const StoreRoles = {
     storeWorker: 10,
     storeManager: 11
 }
+
+export const UserStatus = {
+    inactive : 0,
+    active : 1,
+    readOnly : 2,
+}

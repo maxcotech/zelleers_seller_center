@@ -13,3 +13,13 @@ export const setSideBarStatus = (data) => {
         payload:data
     }
 }
+
+export const useCustomLoader = (value,customLoader) => {
+    return (dispatch) => {
+        if(customLoader){
+            customLoader(value);
+        } else {
+            dispatch(setLoading(value));
+        }
+    }
+}

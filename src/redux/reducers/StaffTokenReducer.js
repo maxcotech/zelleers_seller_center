@@ -3,6 +3,7 @@ import { STAFF_TOKEN_ACTION_TYPES } from "../action_types/StaffTokenActionTypes"
 const initState = {
     tokens:[],
     links:[],
+    current_link:null
 }
 
 const StaffTokenReducer = (state = initState, action) => {
@@ -13,6 +14,11 @@ const StaffTokenReducer = (state = initState, action) => {
                 tokens:action.payload.data,
                 links:action.payload.links,
             };
+        case STAFF_TOKEN_ACTION_TYPES.setCurrentLink:
+            return {
+                ...state,
+                current_link:action.payload
+            }
         default: return state;
     }
 }
