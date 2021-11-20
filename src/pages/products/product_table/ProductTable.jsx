@@ -13,6 +13,7 @@ import { confirmAction } from "src/config/helpers/message_helpers";
 const ProductTable = () => {
     const dispatch = useDispatch();
     const loading = useSelector(state => state.app.loading);
+    const {currency_sym} = useSelector(state => state.auth.currency);
     const { links, products,current_link } = useSelector(state => state.product);
     const [filters, setFilters] = useState({
         status: resourceStatus.active,
@@ -100,8 +101,8 @@ const ProductTable = () => {
                                                             <td>{item.product_name ?? "N/A"}</td>
                                                             <td>{item.product_slug ?? "N/A"}</td>
                                                             <td>{item.product_sku ?? "N/A"}</td>
-                                                            <td>{item.regular_price ?? "N/A"}</td>
-                                                            <td>{item.sales_price ?? "N/A"}</td>
+                                                            <td><span dangerouslySetInnerHTML={{__html:currency_sym}} />{item.regular_price ?? "N/A"}</td>
+                                                            <td><span dangerouslySetInnerHTML={{__html:currency_sym}} />{item.sales_price ?? "N/A"}</td>
                                                             <td>{item.amount_in_stock ?? "N/A"}</td>
                                                             <td>
                                                                 <CButtonGroup>

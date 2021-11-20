@@ -1,14 +1,16 @@
-import { CButton, CCard, CCardBody, CCol, CFormGroup, CInput, CInputGroup, CInputGroupPrepend, CLabel, CRow} from "@coreui/react";
+import { CButton, CCard, CCardBody, CCol, CFormGroup, CInput, CInputGroup, CInputGroupPrepend, CInputGroupText, CLabel, CRow} from "@coreui/react";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import FileUploadComponent from "src/components/FileUploadComponent";
+import HtmlEntity from "src/components/HtmlEntity";
 import { setProductAttribute, uploadMainProductImage } from "src/redux/actions/CurrentProductActions";
 import ProductCategorySelect from "../../components/ProductCategorySelect";
 
 const ProductFrontForm = (props) => {
     const dispatch = useDispatch();
     const current_product = useSelector(state => state.current_product);
+    const {currency_sym,currency_name} = useSelector(state => state.auth.currency);
     const productNameRef = useRef(current_product.product_name ?? "");
     const regularPriceRef = useRef(current_product.regular_price ?? "");
     const salesPriceRef = useRef(current_product.sales_price ?? "");
@@ -43,12 +45,22 @@ const ProductFrontForm = (props) => {
                                 <input onBlur={(e) => dispatch(setProductAttribute(e.target.value,"product_name"))}  className="form-control" ref={productNameRef} placeholder="Eg: Apple Macbook Pro 2021 mi" />
                             </CFormGroup>
                             <CFormGroup>
-                                <CLabel>Regular Price<span className="text-danger">*</span></CLabel>
-                                <input onBlur={(e) => dispatch(setProductAttribute(e.target.value,"regular_price"))}  className="form-control" type="number" ref={regularPriceRef} placeholder="Enter regular price" />
+                                <CLabel>Regular Price in ({currency_name})<span className="text-danger">*</span></CLabel>
+                                <CInputGroup>
+                                    <CInputGroupText>
+                                        <HtmlEntity>{currency_sym}</HtmlEntity>
+                                    </CInputGroupText>
+                                    <input onBlur={(e) => dispatch(setProductAttribute(e.target.value,"regular_price"))}  className="form-control" type="number" ref={regularPriceRef} placeholder="Enter regular price" />
+                                </CInputGroup>
                             </CFormGroup>
                             <CFormGroup>
-                                <CLabel>Sales Price</CLabel>
-                                <input onBlur={(e) => dispatch(setProductAttribute(e.target.value,"sales_price"))}  className="form-control" type="number" ref={salesPriceRef} placeholder="Enter sales price" />
+                                <CLabel>Sales Price in ({currency_name})</CLabel>
+                                <CInputGroup>
+                                    <CInputGroupText>
+                                            <HtmlEntity>{currency_sym}</HtmlEntity>
+                                    </CInputGroupText>
+                                    <input onBlur={(e) => dispatch(setProductAttribute(e.target.value,"sales_price"))}  className="form-control" type="number" ref={salesPriceRef} placeholder="Enter sales price" />
+                                </CInputGroup>
                             </CFormGroup>
                             <CFormGroup>
                                 <CLabel>Amount In Stock</CLabel>
