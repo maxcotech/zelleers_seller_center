@@ -15,15 +15,26 @@ const StoreForm = (props) => {
         country_id:"",state:"",city:"",
         store_address:""
     });
-    const [states,setStates] = useState([]);
-    const [cities,setCities] = useState([]);
-
+    const [states,setStates] = useState(props.states ?? []);
+    const [cities,setCities] = useState(props.cities ?? []);
     const submitForm = () => { 
         props.submitHandler(formState);
     }
     useEffect(() => {
         if(countries.length === 0){
             dispatch(fetchCountries());
+        }
+        if(props.defaultData){
+            if(props.defaultData.country_id){
+                dispatch(completeWithStates(props.defaultData.country_id,(val) => setStates(val)));
+            }
+            if(props.defaultData.state && props.defaultData.country_id){
+                dispatch(completeWithCities(
+                    props.defaultData.country_id,
+                    props.defaultData.state,
+                    (val) => setCities(val)
+                ))
+            }
         }
     },[]);
 
@@ -72,14 +83,18 @@ const StoreForm = (props) => {
                             onChange={(e) => setFormStateValue(e.target.value,'store_telephone')}
                         />
                     </CCol>
-                    <CCol>
-                        <CLabel>Store Logo</CLabel>
-                        <CInput 
-                            type="file"
-                            onChange={(e) => 
-                                setFormStateValue(e.target.files[0],'store_logo')}
-                        />
-                    </CCol>
+                    {
+                        (props.editMode === true)?
+                        <></>:<CCol>
+                            <CLabel>Store Logo</CLabel>
+                            <CInput 
+                                type="file"
+                                onChange={(e) => 
+                                    setFormStateValue(e.target.files[0],'store_logo')}
+                            />
+                        </CCol>
+                    }
+                    
                 </CRow>
                 
             </CFormGroup>

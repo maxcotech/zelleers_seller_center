@@ -88,6 +88,15 @@ const _nav =  [
           text:"NEW",
           color:"success"
         }
+      },
+      {
+        _tag:'CSidebarNavItem',
+        name: 'Edit Store',
+        to: '/store/update',
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
       }
     ]
   },

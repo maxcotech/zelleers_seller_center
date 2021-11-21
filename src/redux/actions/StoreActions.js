@@ -128,6 +128,49 @@ export const createStoreAction = (data) => {
     }
 }
 
+export const updateStore = (data,onComplete = null) => {
+    return async (dispatch) => {
+        try{
+            dispatch(setLoading(true));
+            const result = await axios.put(`${BASE_URL}store`,data);
+            dispatch(setLoading(false));
+            if(result.data?.status === "success"){
+                toast.success(result.data.message);
+                dispatch(fetchUser(onComplete));
+            } else {
+                toast.error(result.data?.message ?? "An Error Occurred.");
+            }
+        }
+        catch(ex){
+            handleAxiosError(ex);
+            dispatch(setLoading(false))
+        }
+    }
+}
+
+export const uploadStoreLogo = (file,store_id,iloader = null, onComplete = null) => {
+    return async (dispatch) => {
+        try{
+            dispatch(useCustomLoader(true,iloader));
+            const formData = new FormData();
+            formData.append('store_logo',file);
+            formData.append('store_id',store_id);
+            const result = await axios.post(`${BASE_URL}store/logo`,formData);
+            dispatch(useCustomLoader(false,iloader));
+            if(result.data?.status === "success"){
+                toast.success(result.data.message);
+                if(onComplete) onComplete(result.data.data);
+            } else {
+                toast.error(result.data?.message ?? "An Error Occurred.");
+            }
+        }
+        catch(ex){
+            handleAxiosError(ex);
+            dispatch(useCustomLoader(false,iloader));
+        }
+    }
+}
+
 export const completeWithStates = (country_id,onComplete = null,iloader = null) => {
     return async (dispatch) => {
         try{
