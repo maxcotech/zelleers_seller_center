@@ -1,24 +1,48 @@
 import { CButton, CCol, CFormGroup, CInput, CLabel, CRow, CSelect } from "@coreui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Spinner from "src/components/Spinner";
 import { fetchCountries } from "src/redux/actions/CountryActions";
+import { completeWithCities, completeWithStates } from "src/redux/actions/StoreActions";
 
 const StoreForm = (props) => {
     const dispatch = useDispatch();
+    const loading = useSelector(state => state.app.loading);
     const countries = useSelector(state => state.country.countries);
     const [formState,setFormState] = useState(props.defaultData ?? {
         store_name:"",store_email:"",
         store_telephone:"",store_logo:"",
-        country_id:""
+        country_id:"",state:"",city:"",
+        store_address:""
     });
-    const submitForm = () => {
+    const [states,setStates] = useState([]);
+    const [cities,setCities] = useState([]);
+
+    const submitForm = () => { 
         props.submitHandler(formState);
     }
     useEffect(() => {
         if(countries.length === 0){
             dispatch(fetchCountries());
         }
-    },[])
+    },[]);
+
+    const onCountryChange = (e) => {
+        const countryId = e.target.value;
+        setFormStateValue(countryId,'country_id');
+        dispatch(completeWithStates(countryId,(val) => setStates(val)));
+    }
+
+    const onStateChange = (e) => {
+        const stateName = e.target.value;
+        setFormStateValue(stateName,'state');
+        if(formState.country_id !== ""){
+            dispatch(completeWithCities(
+                formState.country_id,stateName,(val) => setCities(val)
+            ))
+        }
+    }
+    
 
     const setFormStateValue = (value,key) => {
         setFormState({
@@ -68,9 +92,16 @@ const StoreForm = (props) => {
                 />
             </CFormGroup>
             <CFormGroup>
+                <CLabel>Store Address</CLabel>
+                <CInput 
+                    placeholder="Enter Store Address"
+                    value={formState.store_address}
+                    onChange={(e) => setFormStateValue(e.target.value,'store_address')}
+                />
+            </CFormGroup>
+            <CFormGroup>
                 <CLabel>Store Country<span className="text-danger">*</span></CLabel>
-                <CSelect value={formState.country_id}
-                    onChange={(e) => setFormStateValue(e.target.value,'country_id')}>
+                <CSelect onChange={onCountryChange} value={formState.country_id}>
                     <option value="">Select Store Country</option>
                     {
                         countries.length > 0?
@@ -81,7 +112,33 @@ const StoreForm = (props) => {
                 </CSelect>
             </CFormGroup>
             <CFormGroup>
-                <CButton onClick={() => submitForm()} block color="primary"> Submit</CButton>
+                <CLabel>State Located<span className="text-danger">*</span></CLabel>
+                <CInput onChange={onStateChange} list="state_list" placeholder="Select State Located" value={formState.state} />
+                <datalist id="state_list">
+                    {
+                        (states.length > 0)? 
+                             states.map((item,index) => (
+                                 <option key={'state_option-'+index} value={item.state_name} />
+                             ))
+                            :<option value="Select Country First" />
+                    }
+                </datalist>
+            </CFormGroup>
+            <CFormGroup>
+                <CLabel>City Located<span className="text-danger">*</span></CLabel>
+                <CInput onChange={(e) => setFormStateValue(e.target.value,'city')} list="city_list" placeholder="Select City Located" value={formState.city} />
+                <datalist id="city_list">
+                    {
+                        (cities.length > 0)? 
+                             cities.map((item,index) => (
+                                 <option key={'city_option-'+index} value={item.city_name} />
+                             ))
+                            :<option value="Select State First" />
+                    }
+                </datalist>
+            </CFormGroup>
+            <CFormGroup>
+                <CButton onClick={() => submitForm()} block color="primary"><Spinner status={loading} /> Submit</CButton>
             </CFormGroup>
 
         </form>

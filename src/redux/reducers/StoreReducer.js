@@ -1,4 +1,4 @@
-const { STORE_ACTION_TYPES } = require("../action_types/StoreActionTypes")
+import { STORE_ACTION_TYPES } from "../action_types/StoreActionTypes";
 
 
 const initState = {

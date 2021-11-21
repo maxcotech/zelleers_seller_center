@@ -47,18 +47,22 @@ const ProductFrontForm = (props) => {
                             <CFormGroup>
                                 <CLabel>Regular Price in ({currency_name})<span className="text-danger">*</span></CLabel>
                                 <CInputGroup>
-                                    <CInputGroupText>
-                                        <HtmlEntity>{currency_sym}</HtmlEntity>
-                                    </CInputGroupText>
+                                    <CInputGroupPrepend>
+                                        <CInputGroupText>
+                                            <HtmlEntity>{currency_sym}</HtmlEntity>
+                                        </CInputGroupText>
+                                    </CInputGroupPrepend>
                                     <input onBlur={(e) => dispatch(setProductAttribute(e.target.value,"regular_price"))}  className="form-control" type="number" ref={regularPriceRef} placeholder="Enter regular price" />
                                 </CInputGroup>
                             </CFormGroup>
                             <CFormGroup>
                                 <CLabel>Sales Price in ({currency_name})</CLabel>
                                 <CInputGroup>
-                                    <CInputGroupText>
-                                            <HtmlEntity>{currency_sym}</HtmlEntity>
-                                    </CInputGroupText>
+                                    <CInputGroupPrepend>
+                                        <CInputGroupText>
+                                                <HtmlEntity>{currency_sym}</HtmlEntity>
+                                        </CInputGroupText>
+                                    </CInputGroupPrepend>
                                     <input onBlur={(e) => dispatch(setProductAttribute(e.target.value,"sales_price"))}  className="form-control" type="number" ref={salesPriceRef} placeholder="Enter sales price" />
                                 </CInputGroup>
                             </CFormGroup>

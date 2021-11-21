@@ -4,7 +4,7 @@ import { UserRoles } from "src/config/app_config/user_config"
 import { BASE_URL } from "src/config/constants/app_constants"
 import { handleAxiosError } from "src/config/helpers/http_helpers"
 import { STORE_ACTION_TYPES } from "../action_types/StoreActionTypes"
-import { setLoading } from "./AppActions"
+import { setLoading, useCustomLoader } from "./AppActions"
 import { fetchUser } from "./AuthActions"
 
 export const setStore = (payload) => {
@@ -125,5 +125,45 @@ export const createStoreAction = (data) => {
             dispatch(setLoading(false));
             handleAxiosError(ex);
         })
+    }
+}
+
+export const completeWithStates = (country_id,onComplete = null,iloader = null) => {
+    return async (dispatch) => {
+        try{
+            dispatch(useCustomLoader(true,iloader));
+            const params = {country_id};
+            const result = await axios.get(`${BASE_URL}states`,{params});
+            dispatch(useCustomLoader(false,iloader));
+            if(result.data?.status === "success"){
+                if(onComplete) onComplete(result.data.data);
+            } else {
+                toast.error(result.data?.message ?? "An Error Occurred.");
+            }
+        }
+        catch(ex){
+            dispatch(useCustomLoader(false,iloader));
+            handleAxiosError(ex);
+        }
+    }
+}
+
+export const completeWithCities = (country_id,state,onComplete = null,iloader = null) => {
+    return async (dispatch) => {
+        try{
+            dispatch(useCustomLoader(true,iloader));
+            const params = {country_id,state};
+            const result = await axios.get(`${BASE_URL}cities`,{params});
+            dispatch(useCustomLoader(false,iloader));
+            if(result.data?.status === "success"){
+                if(onComplete) onComplete(result.data.data);
+            } else {
+                toast.error(result.data?.message ?? "An Error Occurred.");
+            }
+        }
+        catch(ex){
+            handleAxiosError(ex);
+            dispatch(useCustomLoader(false,iloader))
+        }
     }
 }
