@@ -101,6 +101,24 @@ const _nav =  [
     ]
   },
   {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Manage Shipping',
+    route: '/store',
+    icon: 'cil-settings',
+    _children: [
+      {
+        _tag:'CSidebarNavItem',
+        name: 'Shipping Groups',
+        to: '/shipping/groups',
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
+      }
+
+    ]
+  },
+  {
     _tag: 'CSidebarNavItem',
     name: 'Logout',
     to: '/logout',

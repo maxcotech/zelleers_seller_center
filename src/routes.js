@@ -46,15 +46,17 @@ const StoreStaffs = React.lazy(() => import('./pages/store/store_staffs/StoreSta
 const CreateProduct = React.lazy(() => import('./pages/products/product_upload_form/ProductUploadForm'));
 const ProductTable = React.lazy(() => import('./pages/products/product_table/ProductTable'));
 const EditStore = React.lazy(() => import('./pages/store/edit_store/EditStore'));
+const ShippingGroups = React.lazy(() => import('./pages/shipping/shipping_groups/ShippingGroups'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
-
   { path: "/store/create", name:"Create Store", component: CreateStore},
   { path: "/store/staff-tokens", name:"Staff Tokens", component: StaffTokens},
   { path: "/store/join", name:"Join a store", component: JoinStore},
   { path: "/store/staffs", name:"Store Staffs", component: StoreStaffs},
   { path: "/store/update", name:"Update Store", component: EditStore},
+
+  { path: "/shipping/groups", name:"Shipping Group", component: ShippingGroups},
 
 
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
