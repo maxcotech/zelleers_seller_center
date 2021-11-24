@@ -78,7 +78,7 @@ const StoreStaffs = () => {
                                 {
                                     store_staffs.map((item,index) => {
                                         return (
-                                            <tr key={"store_staffs-"+index}>
+                                            <tr key={"store_staffs-"+item.id}>
                                                 <td>{index + 1}</td>
                                                 <td>{item.user?.first_name}</td>
                                                 <td>{item.user?.last_name}</td>

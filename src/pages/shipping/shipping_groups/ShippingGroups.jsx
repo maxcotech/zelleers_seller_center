@@ -9,6 +9,7 @@ import PaginationComponent from "src/components/PaginationComponent";
 import Spinner from "src/components/Spinner";
 import { confirmAction } from "src/config/helpers/message_helpers";
 import { createShippingGroups, deleteShippingGroup, fetchShippingGroups } from "src/redux/actions/ShippingGroupActions";
+import ShippingLocations from "../shipping_locations/ShippingLocations";
 import DimensionRatesModal from "./components/DimensionRatesModal";
 import ShippingGroupForm from "./components/ShippingGroupForm";
 import UpdateShippingGroup from "./components/UpdateShippingGroup";
@@ -67,7 +68,7 @@ const ShippingGroups = () => {
                                     <tbody>
                                         {
                                             shipping_groups.map((item,index) => (
-                                                <tr key={'shipping_group_'+index}>
+                                                <tr key={'shipping_group_'+item.id}>
                                                     <td>{index + 1}</td>
                                                     <td>{item.group_name}</td>
                                                     <td>{item.delivery_duration+" Days"}</td>
@@ -92,9 +93,12 @@ const ShippingGroups = () => {
                                                         </CButtonGroup>
                                                     </td>
                                                     <td>
-                                                        <CButton color="info">
+                                                        <ShippingLocations 
+                                                            title={item.group_name}
+                                                            group_id={item.id}
+                                                        >
                                                             View&nbsp;Locations
-                                                        </CButton>
+                                                        </ShippingLocations>
                                                     </td>
 
                                                 </tr>

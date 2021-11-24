@@ -95,7 +95,7 @@ const ProductTable = () => {
                                             {
                                                 products.map((item, index) => {
                                                     return (
-                                                        <tr>
+                                                        <tr key={item.id}>
                                                             <td>{index + 1}</td>
                                                             <td><CircleAvatar borderRadius={"5px"} radius={"50px"} src={item.product_image} /></td>
                                                             <td>{item.product_name ?? "N/A"}</td>

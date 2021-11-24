@@ -10,8 +10,8 @@ const StoreSearchList = (props) => {
                     <CCardBody>
                         <table className="table striped">
                         {
-                            props.list.map((item,index) => (
-                                <tr onClick={() => props.onSelectItem(item)} className="hoverable" key={index} >
+                            props.list.map((item) => (
+                                <tr onClick={() => props.onSelectItem(item)} className="hoverable" key={item.id} >
                                     <td style={{width:"20%"}}><CircleAvatar radius={50} src={item.store_logo}/></td>
                                     <td style={{width:"70%"}}><h6>{item.store_name}</h6><div>{item.store_slug}</div></td>
                                     <td><b style={{fontSize:"2em"}} dangerouslySetInnerHTML={{__html:"&#8594;"}} /></td>

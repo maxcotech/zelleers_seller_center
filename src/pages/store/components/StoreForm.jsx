@@ -1,7 +1,8 @@
 import { CButton, CCol, CFormGroup, CInput, CLabel, CRow, CSelect } from "@coreui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "src/components/Spinner";
+import { valueExistsInDataList } from "src/config/helpers/validation_helpers";
 import { fetchCountries } from "src/redux/actions/CountryActions";
 import { completeWithCities, completeWithStates } from "src/redux/actions/StoreActions";
 
@@ -9,6 +10,8 @@ const StoreForm = (props) => {
     const dispatch = useDispatch();
     const loading = useSelector(state => state.app.loading);
     const countries = useSelector(state => state.country.countries);
+    const stateListRef = useRef();
+    const cityListRef = useRef();
     const [formState,setFormState] = useState(props.defaultData ?? {
         store_name:"",store_email:"",
         store_telephone:"",store_logo:"",
@@ -48,9 +51,11 @@ const StoreForm = (props) => {
         const stateName = e.target.value;
         setFormStateValue(stateName,'state');
         if(formState.country_id !== ""){
-            dispatch(completeWithCities(
-                formState.country_id,stateName,(val) => setCities(val)
-            ))
+            if(valueExistsInDataList(stateName,stateListRef)){
+                dispatch(completeWithCities(
+                    formState.country_id,stateName,(val) => setCities(val)
+                ))            
+            }
         }
     }
     
@@ -129,7 +134,7 @@ const StoreForm = (props) => {
             <CFormGroup>
                 <CLabel>State Located<span className="text-danger">*</span></CLabel>
                 <CInput onChange={onStateChange} list="state_list" placeholder="Select State Located" value={formState.state} />
-                <datalist id="state_list">
+                <datalist ref={stateListRef} id="state_list">
                     {
                         (states.length > 0)? 
                              states.map((item,index) => (
@@ -142,7 +147,7 @@ const StoreForm = (props) => {
             <CFormGroup>
                 <CLabel>City Located<span className="text-danger">*</span></CLabel>
                 <CInput onChange={(e) => setFormStateValue(e.target.value,'city')} list="city_list" placeholder="Select City Located" value={formState.city} />
-                <datalist id="city_list">
+                <datalist ref={cityListRef} id="city_list">
                     {
                         (cities.length > 0)? 
                              cities.map((item,index) => (

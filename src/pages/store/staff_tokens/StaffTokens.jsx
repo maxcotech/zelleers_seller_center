@@ -54,8 +54,8 @@ const StaffTokens = () => {
                                 <tbody>
                                 {
                                     token.tokens.map(
-                                        (item,index) =>
-                                            <tr key={index}>
+                                        (item) =>
+                                            <tr key={item.id}>
                                                 <td>{item.id}</td>
                                                 <td ><CopyBox >{item.staff_token}</CopyBox></td>
                                                 <td>{item.staff_type_text}</td>

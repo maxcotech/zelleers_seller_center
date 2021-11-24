@@ -7,6 +7,7 @@ import CountryReducer from "./CountryReducer";
 import CurrentProductReducer from "./CurrentProductReducer";
 import ProductReducer from "./ProductReducer";
 import ShippingGroupReducer from "./ShippingGroupReducer";
+import ShippingLocationReducer from "./ShippingLocationReducer";
 import StaffTokenReducer from "./StaffTokenReducer";
 import StoreReducer from "./StoreReducer";
 import StoreStaffReducer from "./StoreStaffReducer";
@@ -23,7 +24,8 @@ const appReducers = combineReducers({
     variation_option:VariationOptionReducer,
     product:ProductReducer,
     store_staff:StoreStaffReducer,
-    shipping_group:ShippingGroupReducer
+    shipping_group:ShippingGroupReducer,
+    shipping_location:ShippingLocationReducer
 });
 
 const rootReducers = (state,action) => {
