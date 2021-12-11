@@ -5,7 +5,7 @@ import { handleAxiosError } from "src/config/helpers/http_helpers";
 import { handleArrayMessage } from "src/config/helpers/message_helpers";
 import Swal from "sweetalert2";
 import { AUTH_ACTION_TYPES } from "../action_types/AuthActionTypes";
-import { setLoading } from "./AppActions";
+import { setLoading, useCustomLoader } from "./AppActions";
 import { setStore } from "./StoreActions";
 
 export const setUserData = (data,dispatch) => {
@@ -123,5 +123,25 @@ export const logoutUser = () => {
         .catch((ex) => {
             handleAxiosError(ex);
         })
+    }
+}
+
+export const updateUserCurrency = (currency_id,iloader = null, onComplete = null) => {
+    return async (dispatch) => {
+        try{
+            dispatch(useCustomLoader(true,iloader));
+            const params = {currency_id}
+            const result = await axios.put(`${BASE_URL}user/currency`,params);
+            dispatch(useCustomLoader(false,iloader));
+            if(result.data?.status === "success"){
+                dispatch(fetchUser(onComplete));
+            } else {
+                toast.error(result.data?.error ?? "An Error Occurred.");
+            }
+        }
+        catch(ex){
+            handleAxiosError(ex);
+            dispatch(useCustomLoader(false,iloader));
+        }
     }
 }

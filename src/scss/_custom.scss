@@ -6,3 +6,15 @@
 .inline-block{
     display:inline-block;
 }
+.capitalize{
+    text-transform: capitalize;
+}
+.custom_badge{
+    display:inline-block;
+    padding:5px 8px 5px 8px;
+    border-radius:20px;
+    font-weight:bold;
+    background-color:gray;
+    color:white;
+    font-size:0.8em
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
+import { orderStatuses } from 'src/config/app_config/order_config'
 
 const _nav =  [
   {
@@ -36,6 +37,106 @@ const _nav =  [
           color:"success"
         }
       }
+    ]
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Store Orders',
+    route: '/orders',
+    icon: 'cil-basket',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Awaiting fulfillment',
+        to: `/orders/${orderStatuses.AWAITING_FULFILLMENT}`,
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Awaiting Shipping',
+        to: `/orders/${orderStatuses.AWAITING_SHIPPING}`,
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Partially Shipped',
+        to: `/orders/${orderStatuses.PARTIALLY_SHIPPED}`,
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Shipped Orders',
+        to: `/orders/${orderStatuses.SHIPPED}`,
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Awaiting Pickup',
+        to: `/orders/${orderStatuses.AWAITING_PICKUP}`,
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Completed Orders',
+        to: `/orders/${orderStatuses.COMPLETED}`,
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Cancelled Orders',
+        to: `/orders/${orderStatuses.CANCELLED}`,
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Disputed Orders',
+        to: `/orders/${orderStatuses.DISPUTED}`,
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Awaiting Refund',
+        to: `/orders/${orderStatuses.AWAITING_REFUND}`,
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Refunded',
+        to: `/orders/${orderStatuses.REFUNDED}`,
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
+      }
+
+      
     ]
   },
   {
@@ -110,6 +211,15 @@ const _nav =  [
         _tag:'CSidebarNavItem',
         name: 'Shipping Groups',
         to: '/shipping/groups',
+        badge: {
+          text:"NEW",
+          color:"success"
+        }
+      },
+      {
+        _tag:'CSidebarNavItem',
+        name: 'Payments',
+        to: '/payment/init',
         badge: {
           text:"NEW",
           color:"success"

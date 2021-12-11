@@ -47,6 +47,8 @@ const CreateProduct = React.lazy(() => import('./pages/products/product_upload_f
 const ProductTable = React.lazy(() => import('./pages/products/product_table/ProductTable'));
 const EditStore = React.lazy(() => import('./pages/store/edit_store/EditStore'));
 const ShippingGroups = React.lazy(() => import('./pages/shipping/shipping_groups/ShippingGroups'));
+const Payments = React.lazy(() => import('./pages/payment/Payment'));
+const Orders = React.lazy(() => import('./pages/orders/Orders'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -57,12 +59,14 @@ const routes = [
   { path: "/store/update", name:"Update Store", component: EditStore},
 
   { path: "/shipping/groups", name:"Shipping Group", component: ShippingGroups},
-
+  { path: "/payment/init", name:"Payments", component:Payments},
 
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: "/store/select", name: 'Choose Store', component: SelectStore },
   { path: "/products", name: 'Products', component: ProductTable},
   { path: "/product/create", name: 'Create Product', component: CreateProduct },
+
+  { path: "/orders/:order_status", name: 'Store Orders', component: Orders },
 
   { path: '/logout', name: 'Log out', component: Logout },
 

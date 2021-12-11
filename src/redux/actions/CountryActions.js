@@ -12,6 +12,32 @@ export const setCountries = (countries) => {
     }
 }
 
+export const setCurrencies = (currencies) => {
+    return {
+        type:COUNTRY_ACTION_TYPES.setCurrencies,
+        payload:currencies
+    }
+}
+
+export const fetchCurrencies = () => {
+    return async (dispatch) => {
+        try{
+            dispatch(setLoading(true));
+            const result = await axios.get(`${BASE_URL}currencies`);
+            dispatch(setLoading(false));
+            if(result.data?.status == "success"){
+                dispatch(setCurrencies(result.data.data));
+            } else {
+                toast.error(result.data?.message ?? "An Error Occurred.");
+            }
+        }
+        catch(ex){
+            handleAxiosError(ex);
+            dispatch(setLoading(false));
+        }
+    }
+}
+
 export const fetchCountries = () => {
     return (dispatch) => {
         dispatch(setLoading(true));
