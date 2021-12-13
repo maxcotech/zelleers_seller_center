@@ -14,9 +14,9 @@ const VariationValueForm = (props) => {
                 <CCard>
                     <CCardBody>
                         {
-                            (props.variation.options.length > 0)?
+                            (props.variation.options?.length > 0)?
                         
-                                props.variation.options.map((item,index) => {
+                                props.variation.options?.map((item,index) => {
                                     return (
                                         <VariationOptionInput  variationIndex={props.index} variation={props.variation} key={`variation-option-input-${props.index}-${index}`} index={index} option={item}  />
                                     )

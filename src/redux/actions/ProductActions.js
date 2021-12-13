@@ -21,6 +21,13 @@ export const setCurrentLink = (link) => {
     }
 }
 
+export const setCurrentParams = (params) => {
+    return {
+        type:PRODUCT_ACTION_TYPES.setCurrentParams,
+        payload:params
+    }
+}
+
 export const fetchProductDetails = (product_slug,iloading = null,onComplete = null) => {
     return async (dispatch) => {
         try{
@@ -42,17 +49,20 @@ export const fetchProductDetails = (product_slug,iloading = null,onComplete = nu
     }
 }
 
-export const fetchProducts = (url = null,params = {status:resourceStatus.active}) => {
+export const fetchProducts = (url = null,inputparams = null) => {
     return async (dispatch,getState) => {
         try{
             dispatch(setLoading(true));
             const state = getState();
+            const defaultParams = state.product.params ?? {status:resourceStatus.active};
+            const params = inputparams ?? defaultParams;
             params.store_id = state.store.current_store?.id;
             const result = await axios.get(url ?? `${BASE_URL}store/products`,{params});
             dispatch(setLoading(false));
             if(result.data?.status === "success"){
                 dispatch(setProducts(result.data.data));
-                dispatch(setCurrentLink(url ?? `${BASE_URL}store/products`))
+                dispatch(setCurrentLink(url ?? `${BASE_URL}store/products`));
+                dispatch(setCurrentParams(params));
             } else {
                 toast.error(result.data?.message ?? "An Error Occurred")
             }

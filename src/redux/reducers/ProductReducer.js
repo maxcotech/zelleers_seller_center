@@ -3,7 +3,8 @@ import { PRODUCT_ACTION_TYPES } from "../action_types/ProductActionTypes";
 const initState = {
     products:[],
     links:[],
-    current_link:null
+    current_link:null,
+    params:null
 
 }
 
@@ -20,7 +21,12 @@ const ProductReducer = (state = initState, action) => {
             return {
                 ...state,
                 current_link:action.payload
-            }
+            };
+        case PRODUCT_ACTION_TYPES.setCurrentParams:
+            return {
+                ...state,
+                params:action.payload
+            };
         default: return state;
 
     }
