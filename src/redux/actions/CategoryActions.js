@@ -17,7 +17,9 @@ export const fetchCategories = (url = null,options = null,onComplete = null) => 
         dispatch(setLoading(true));
         axios.get(url ?? `${BASE_URL}categories`,{
             params: options ?? {
-                verbose:1
+                verbose:4,
+                levels:99999,
+                limit:5
             }
         })
         .then((result) => {
