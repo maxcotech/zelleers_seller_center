@@ -23,6 +23,8 @@ import {
   TheHeaderDropdownTasks
 }  from './index'
 import { setSideBarStatus } from 'src/redux/actions/AppActions'
+import SelectCurrencyInput from 'src/components/SelectCurrencyInput'
+import { orderStatuses } from 'src/config/app_config/order_config'
 
 const TheHeader = () => {
   const dispatch = useDispatch()
@@ -51,7 +53,7 @@ const TheHeader = () => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CIcon name="logo" height="48" alt="Logo"/>
+        <h3>ZELLER<span className="text-danger">VENDOR</span></h3> {/*<CIcon name="logo" height="48" alt="Logo"/>*/}
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
@@ -59,10 +61,10 @@ const TheHeader = () => {
           <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem  className="px-3">
-          <CHeaderNavLink to="/users">Users</CHeaderNavLink>
+          <CHeaderNavLink to={`/orders/${orderStatuses.AWAITING_FULFILLMENT}`}>Manage Orders</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink>Settings</CHeaderNavLink>
+          <CHeaderNavLink to="/product/create">Create Product</CHeaderNavLink>
         </CHeaderNavItem>
       </CHeaderNav>
 
@@ -79,19 +81,7 @@ const TheHeader = () => {
           routes={routes} 
         />
           <div className="d-md-down-none mfe-2 c-subheader-nav">
-            <CLink className="c-subheader-nav-link"href="#">
-              <CIcon name="cil-speech" alt="Settings" />
-            </CLink>
-            <CLink 
-              className="c-subheader-nav-link" 
-              aria-current="page" 
-              to="/dashboard"
-            >
-              <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
-            </CLink>
-            <CLink className="c-subheader-nav-link" href="#">
-              <CIcon name="cil-settings" alt="Settings" />&nbsp;Settings
-            </CLink>
+            <SelectCurrencyInput />
           </div>
       </CSubheader>
     </CHeader>

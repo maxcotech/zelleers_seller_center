@@ -5,6 +5,7 @@ export const handleAxiosError = (ex,callback = null) => {
     if(callback) callback();
     if(ex){
         if(ex.response?.data){
+            console.log(ex.response.data.message ?? "An Unknown error");
             handleArrayMessage(ex.response.data.message ?? "sorry, unknown error occurred.",toast.error,"\n" );
             //toast.error(ex.response.data.message ?? );
             return;

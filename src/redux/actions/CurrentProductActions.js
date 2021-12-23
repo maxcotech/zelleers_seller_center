@@ -5,6 +5,7 @@ import { removeIrrelevantAttributes } from "src/config/helpers/array_helpers"
 import { handleAxiosError } from "src/config/helpers/http_helpers"
 import { CURRENT_PRODUCT_TYPE } from "../action_types/CurrentProductType"
 import { setLoading } from "./AppActions"
+import { fetchProducts } from "./ProductActions"
 
 export const setWholeCurrentProduct = (payload,onComplete = null) => {
     let data = {...payload};
@@ -123,7 +124,10 @@ export const uploadProductVariationImage = (file,variation,iloading = null,onCom
         const state = getState();
         const formData = new FormData();
         formData.append('image_file',file);
-        if(state.current_store?.id !== null) formData.append('store_id',state.current_store?.id);
+        if(typeof state.current_product?.id !== "undefined" && state.current_product?.id !== null){
+            formData.append('product_id',state.current_product?.id);
+        }
+        if(state.store.current_store?.id !== null) formData.append('store_id',state.store.current_store?.id);
         if(variation.variation_image_url !== "") formData.append('old_image_url',variation.variation_image_url); 
         if(typeof variation.id !== "undefined") formData.append('variation_id',variation.id);
         axios.post(`${BASE_URL}product/variation_image`,formData)
@@ -156,19 +160,30 @@ export const uploadCurrentProduct = (onComplete = null) => {
     return async (dispatch,getState) => {
         const state = getState();
         const currentProduct = state.current_product;
-        currentProduct.store_id = state.store.current_store?.id;
-        if(typeof currentProduct.store_id === "undefined") return;
+        let submitData = {};
+        const productKeys = Object.keys(currentProduct);
+        productKeys.forEach((key) => {
+            if(key == "variations"){
+                console.log(currentProduct[key]);
+                submitData[key] = JSON.stringify(currentProduct[key]);
+            } else {
+                submitData[key] = currentProduct[key];
+            }
+        });
+        submitData.store_id = state.store.current_store?.id;
+        if(typeof submitData.store_id === "undefined") return;
         dispatch(setLoading(true));
         let result = null;
         try{
-            if(currentProduct.id === null){
-               result = await axios.post(`${BASE_URL}product`,currentProduct);
+            if(submitData.id === null){
+               result = await axios.post(`${BASE_URL}product`,submitData);
             } else {
-               currentProduct.product_id = currentProduct.id;
-               result = await axios.put(`${BASE_URL}product`,currentProduct);
+               submitData.product_id = currentProduct.id;
+               result = await axios.put(`${BASE_URL}product`,submitData);
             }
             dispatch(setLoading(false));
             if(result.data?.status === "success"){
+                dispatch(fetchProducts());
                 toast.success(result.data.message);
                 if(onComplete) onComplete();
             } else {

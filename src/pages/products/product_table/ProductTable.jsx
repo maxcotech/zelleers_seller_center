@@ -51,7 +51,7 @@ const ProductTable = () => {
                     <div style={{ display: "inline-block" }} className="card-header-actions">
                         <CRow>
                             <CCol>
-                                <select style={{ display: "inline-block" }} onChange={onStatusChange} value={filters.status} className="form-control">
+                                <select className="capitalize" style={{ display: "inline-block" }} onChange={onStatusChange} value={filters.status} className="form-control">
                                     {
                                         resourceStatusKeys.map((key) => {
                                             return <option value={resourceStatus[key]}>{key + " products"}</option>
@@ -106,7 +106,7 @@ const ProductTable = () => {
                                                             <td>{item.amount_in_stock ?? "N/A"}</td>
                                                             <td>
                                                                 <CButtonGroup>
-                                                                    <UpdateProductBtn product_slug={item.product_slug} />
+                                                                    <UpdateProductBtn product_slug={item.product_slug ?? item.id} />
                                                                     <LoadingBtn
                                                                         onClick={onDeleteProduct}
                                                                         data={item.id}

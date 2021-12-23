@@ -6,6 +6,7 @@ const PaginationComponent = (props) => {
 
     if(links.length){
         return (
+            <div style={{marginTop:"15px"}}>
             <Pagination>
                 {
                     links.map((item,index) => 
@@ -25,6 +26,7 @@ const PaginationComponent = (props) => {
                     )
                 }
             </Pagination>
+            </div>
         )
     } else {
         return <></>

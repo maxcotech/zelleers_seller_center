@@ -12,7 +12,6 @@ import {
   CSidebarNavItem,
 } from '@coreui/react'
 
-import CIcon from '@coreui/icons-react'
 
 // sidebar nav config
 import navigation from './_nav'
@@ -28,7 +27,8 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch(setSideBarStatus(val))}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <CIcon
+        <h3>ZELLER<span className="text-danger">VENDOR</span></h3>
+        {/*<CIcon
           className="c-sidebar-brand-full"
           name="logo-negative"
           height={35}
@@ -37,7 +37,7 @@ const TheSidebar = () => {
           className="c-sidebar-brand-minimized"
           name="sygnet"
           height={35}
-        />
+        />*/}
       </CSidebarBrand>
       <CSidebarNav>
 
