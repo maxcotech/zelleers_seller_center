@@ -81,12 +81,14 @@ export const uploadMainProductImage = (image_file,setILoading = null) => {
         .then((result) => {
             setILoading? setILoading(false):dispatch(setLoading(false));
             if(result.data?.status === "success"){
+                console.log("main image "+result.data.data?.image_full_path);
                 dispatch(setProductAttribute(result.data.data?.image_full_path,"product_image"))
             } else {
                 toast.error(result.data?.message ?? "An Error occurred");
             }
         })
         .catch((ex) => {
+            console.log(ex);
             setILoading? setILoading(false):dispatch(setLoading(false));
             handleAxiosError(ex);
         })
