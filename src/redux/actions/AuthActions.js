@@ -134,7 +134,7 @@ export const updateUserCurrency = (currency_id,iloader = null, onComplete = null
             const result = await axios.put(`${BASE_URL}user/currency`,params);
             dispatch(useCustomLoader(false,iloader));
             if(result.data?.status === "success"){
-                dispatch(fetchUser(onComplete));
+                if(onComplete) onComplete();
             } else {
                 toast.error(result.data?.error ?? "An Error Occurred.");
             }
