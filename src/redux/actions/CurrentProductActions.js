@@ -15,6 +15,7 @@ export const setWholeCurrentProduct = (payload,onComplete = null) => {
     })
     data = appendCategoryAndBrandNames(data);
     data = removeIrrelevantAttributes(data,['images','category','brand']);
+    data.variations = getModifiedNetworkVariations(data.variations);
     console.log('inside set whole product ',data);
     return (dispatch) => {
         dispatch(setCurrentProduct(data));
@@ -39,11 +40,26 @@ export const setCurrentProduct = (data) => {
     }
 }
 
+export const getModifiedNetworkVariations = (variations) => {
+    const newVariations = [];
+    if(variations.length > 0){
+        variations.forEach((item) => {
+            const newObject = {
+                ...item,
+                variation_image_url:item.variation_image
+            };
+            newVariations.push(newObject);
+        })
+    }
+    return newVariations;
+}
+
 export const setCurrentProductVariations = (variations) => {
     return {
         type:CURRENT_PRODUCT_TYPE.setCurrentProductVariations,
         payload:variations
     }
+    
 }
  
 

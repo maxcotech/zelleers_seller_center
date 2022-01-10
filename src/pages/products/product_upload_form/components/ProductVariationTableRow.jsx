@@ -4,6 +4,7 @@ import { setCurrentProductVariations, uploadProductVariationImage } from "src/re
 import { useCallback, useRef } from "react";
 import VariationValueForm from "./VariationValueForm";
 import { CButton, CButtonGroup } from "@coreui/react";
+import { useEffect } from "react";
 
 
 const ProductVariationTableRow = (props) => {
@@ -11,11 +12,11 @@ const ProductVariationTableRow = (props) => {
     const dispatch = useDispatch();
     const {item,index} = props;
 
-    const variationNameRef = useRef(item.variation_name);
-    const variationSkuRef = useRef(item.variation_sku);
-    const regularPriceRef = useRef(item.regular_price);
-    const salesPriceRef = useRef(item.sales_price);
-    const amountInStockRef = useRef(item.amount_in_stock);
+    let variationNameRef = useRef(item.variation_name);
+    let variationSkuRef = useRef(item.variation_sku);
+    let regularPriceRef = useRef(item.regular_price);
+    let salesPriceRef = useRef(item.sales_price);
+    let amountInStockRef = useRef(item.amount_in_stock);
     const currentProduct = useSelector(state => state.current_product);
 
     const updateVariationByIndex = (index,item) => {
@@ -44,6 +45,14 @@ const ProductVariationTableRow = (props) => {
         dispatch(setCurrentProductVariations(variations))
     })
 
+    useEffect(() => {
+        variationNameRef.current.value = item.variation_name;
+        variationSkuRef.current.value = item.variation_sku;
+        regularPriceRef.current.value = item.regular_price;
+        salesPriceRef.current.value = item.sales_price;
+        amountInStockRef.current.value = item.amount_in_stock;
+    },[index])
+
     return (
         <tr>
             <td>
@@ -59,7 +68,7 @@ const ProductVariationTableRow = (props) => {
                     file_path={item.variation_image_url}
                 />
             </td>
-            <td><input onBlur={(e) => setInputValue(e.target.value,"variation_name")} ref={variationNameRef} placeholder="Variaion Name" /></td>
+            <td><input onBlur={(e) => setInputValue(e.target.value,"variation_name")} ref={variationNameRef} placeholder="Variation Name" /></td>
             <td><input onBlur={(e) => setInputValue(e.target.value,"variation_sku")} ref={variationSkuRef} placeholder="Variation Sku" /></td>
             <td><input onBlur={(e) => setInputValue(e.target.value,"regular_price")} ref={regularPriceRef} placeholder="Regular Price" /></td>
             <td><input onBlur={(e) => setInputValue(e.target.value,"sales_price")} ref={salesPriceRef} placeholder="Sales Price" /></td>
