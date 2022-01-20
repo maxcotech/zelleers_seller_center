@@ -4,6 +4,7 @@ import { BASE_URL } from "src/config/constants/app_constants";
 import { handleAxiosError } from "src/config/helpers/http_helpers"
 import { ORDER_ACTION_TYPES } from "../action_types/OrderActionTypes";
 import { setLoading, useCustomLoader } from "./AppActions";
+import { getService } from './ActionServices';
 
 export const setStoreOrders = (data) => {
     return {
@@ -23,6 +24,22 @@ export const setRequestParams = (data) => {
     return {
         type:ORDER_ACTION_TYPES.setCurrentParams,
         payload:data
+    }
+}
+
+export const setCurrentOrderItems = (payload) => {
+    return {
+        type:ORDER_ACTION_TYPES.setCurrentOrderItems,
+        payload
+    }
+}
+
+export const fetchOrderItems = (params = {},iloader = null,onComplete = null) => {
+    return(dispatch) => {
+        dispatch(getService(`${BASE_URL}order_items`,{params,iloader,onComplete:(data) => {
+            dispatch(setCurrentOrderItems(data));
+            if(onComplete) onComplete(data);
+        }}));
     }
 }
 

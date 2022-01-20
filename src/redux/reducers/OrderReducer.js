@@ -4,6 +4,7 @@ const initState = {
     orders:[],
     links:[],
     current_link:null,
+    current_order_items:[],
     params:null
 }
 
@@ -26,6 +27,11 @@ const OrderReducer = (state = initState, action) => {
                 ...state,
                 params:action.payload
             };
+        case ORDER_ACTION_TYPES.setCurrentOrderItems:
+            return {
+                ...state,
+                current_order_items:action.payload
+            }
         default:return state;
     }
 }

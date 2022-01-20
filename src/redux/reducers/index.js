@@ -13,6 +13,7 @@ import StaffTokenReducer from "./StaffTokenReducer";
 import StoreReducer from "./StoreReducer";
 import StoreStaffReducer from "./StoreStaffReducer";
 import VariationOptionReducer from "./VariationOptionReducer";
+import DashboardReducer from './DashboardReducer';
 
 const appReducers = combineReducers({
     auth:AuthReducer,
@@ -27,7 +28,8 @@ const appReducers = combineReducers({
     store_staff:StoreStaffReducer,
     shipping_group:ShippingGroupReducer,
     shipping_location:ShippingLocationReducer,
-    order:OrderReducer
+    order:OrderReducer,
+    dashboard:DashboardReducer
 });
 
 const rootReducers = (state,action) => {

@@ -4,6 +4,7 @@ import { BASE_URL } from "src/config/constants/app_constants"
 import { handleAxiosError } from "src/config/helpers/http_helpers"
 import { COUNTRY_ACTION_TYPES } from "../action_types/CountryActionTypes"
 import { setLoading } from "./AppActions"
+import { getService } from './ActionServices';
 
 export const setCountries = (countries) => {
     return {
@@ -19,22 +20,12 @@ export const setCurrencies = (currencies) => {
     }
 }
 
-export const fetchCurrencies = () => {
-    return async (dispatch) => {
-        try{
-            dispatch(setLoading(true));
-            const result = await axios.get(`${BASE_URL}currencies`);
-            dispatch(setLoading(false));
-            if(result.data?.status == "success"){
-                dispatch(setCurrencies(result.data.data));
-            } else {
-                toast.error(result.data?.message ?? "An Error Occurred.");
-            }
-        }
-        catch(ex){
-            handleAxiosError(ex);
-            dispatch(setLoading(false));
-        }
+export const fetchCurrencies = (params = {},iloader = null,onComplete = null) => {
+    return (dispatch) => {
+        dispatch(getService(`${BASE_URL}currencies`,{params,iloader,onComplete:(data) => {
+            dispatch(setCurrencies(data));
+            onComplete(data);
+        }}))
     }
 }
 

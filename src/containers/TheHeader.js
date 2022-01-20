@@ -16,20 +16,15 @@ import CIcon from '@coreui/icons-react'
 // routes config
 import routes from '../routes'
 
-import { 
-  TheHeaderDropdown,
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks
-}  from './index'
 import { setSideBarStatus } from 'src/redux/actions/AppActions'
 import SelectCurrencyInput from 'src/components/SelectCurrencyInput'
 import { orderStatuses } from 'src/config/app_config/order_config'
+import ExpandableImage from 'src/components/ExpandableImage'
 
 const TheHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector(state => state.app.sidebar)
-
+  const {first_name,last_name} = useSelector(state => state.auth.user);
   const toggleSidebar = () => {
     const val = [true, 'responsive'].includes(sidebarShow) ? false : 'responsive'
     dispatch(setSideBarStatus(val))
@@ -53,7 +48,7 @@ const TheHeader = () => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <h3>ZELLER<span className="text-danger">VENDOR</span></h3> {/*<CIcon name="logo" height="48" alt="Logo"/>*/}
+        <h3>ZELLER<span className="text-success">VENDOR</span></h3> {/*<CIcon name="logo" height="48" alt="Logo"/>*/}
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
@@ -69,10 +64,12 @@ const TheHeader = () => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <TheHeaderDropdownNotif/>
-        <TheHeaderDropdownTasks/>
-        <TheHeaderDropdownMssg/>
-        <TheHeaderDropdown/>
+        <CHeaderNavItem className="px-3" >
+          <CHeaderNavLink to="/dashboard"><span style={{textTransform:"capitalize",fontSize:"1.2em"}}>{first_name} {last_name}</span></CHeaderNavLink>
+        </CHeaderNavItem>
+        <CHeaderNavItem>
+          <ExpandableImage borderRadius="50%" width="auto" height="40px" title="Avatar" src="images/avatar.jpg" />
+        </CHeaderNavItem>
       </CHeaderNav>
 
       <CSubheader className="px-3 justify-content-between">
