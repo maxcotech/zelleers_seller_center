@@ -37,6 +37,9 @@ const ProductTable = () => {
             dispatch(deleteProduct(data, iloading, onComplete))
         }
     }
+    const onPaginateClick = (url) => {
+        dispatch(fetchProducts(url,filters))
+    }
 
     useEffect(() => {
         dispatch(fetchProducts(current_link, filters));
@@ -124,7 +127,7 @@ const ProductTable = () => {
                                         </tbody>
                                     </table>
                                 </div>
-                                <PaginationComponent links={links} onClick={(url) => console.log(url)} />
+                                <PaginationComponent links={links} onClick={onPaginateClick} />
                             </> :
                             <CAlert color="info">
                                 <h3>No Product Found</h3>
