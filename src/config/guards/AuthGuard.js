@@ -35,7 +35,12 @@ const AuthGuard = ({ component: Component, redirectTo, loggedIn, currentRoute, u
                 }
             } 
             else {
-                return <Redirect to={{pathname:"/register"}} />
+                if(validPath[1] === props.location.pathname){
+                    return <Component {...props} />
+                } else {
+                    console.log('redirecting to invalid account page');
+                    return <Redirect to={{pathname:"/invalid-account"}} />
+                }
             }
         } else {
             console.log('redirecting to login...',loggedIn);

@@ -22,6 +22,7 @@ const Login = React.lazy(() => import('./pages/login/Login'));
 const Register = React.lazy(() => import('./pages/register/Register'));
 const Page404 = React.lazy(() => import('./views/pages/page404/Page404'));
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
+const InvalidAccount = React.lazy(() => import('./pages/invalid_account/InvalidAccount'));
 
 const App = (props) => {
     const auth = useSelector(state => state.auth);
@@ -45,6 +46,8 @@ const App = (props) => {
               <Route exact path="/register" name="Register Page" render={props => <Register {...props}/>} />
               <Route exact path="/404" name="Page 404" render={props => <Page404 {...props}/>} />
               <Route exact path="/500" name="Page 500" render={props => <Page500 {...props}/>} />
+              <Route exact path="/invalid-account" name="Invalid Account" render={props => <InvalidAccount {...props}/>} />
+
               <AuthGuard loggedIn={auth.logged_in} path="/" name="Home" redirectTo="/login" userStore={store.current_store} userRole={ auth.user?.user_type } component={TheLayout} />
             </Switch>
           </React.Suspense>

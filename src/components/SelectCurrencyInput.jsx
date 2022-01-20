@@ -10,22 +10,22 @@ const SelectCurrencyInput = () => {
 
     const {id} = useSelector(state => state.auth.currency);
     const [loading,setLoading] = useState(false);
-    const {currencies} = useSelector(state => state.country);
+    const [currencies,setCurrencies] = useState([]);
     const dispatch = useDispatch();
     const onCurrencyChange = (e) => {
         const value = e.target.value;
         if(value != ""){
             dispatch(updateUserCurrency(
-                    value,
-                    (val) => setLoading(val),
-                    () => window.location.reload()
-                )
-            )
+                value,(val) => setLoading(val),
+                () => window.location.reload()
+            ))
         }
     }
     useEffect(() => {
         if(currencies.length == 0){
-            dispatch(fetchCurrencies());
+            dispatch(fetchCurrencies({},null,(data) => {
+                setCurrencies(data);
+            }));
         }
     },[])
 
