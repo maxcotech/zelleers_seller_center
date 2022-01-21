@@ -51,6 +51,7 @@ const Payments = React.lazy(() => import('./pages/payment/Payment'));
 const Orders = React.lazy(() => import('./pages/orders/Orders'));
 const DashboardPage = React.lazy(() => import('./pages/dashboard/Dashboard'));
 const StoreWallet = React.lazy(() => import('./pages/store_fund/store_wallet/StoreWallet'));
+const BankAccounts = React.lazy(() => import('./pages/store_fund/bank_account/BankAccounts'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -71,6 +72,7 @@ const routes = [
   { path: "/product/create", name: 'Create Product', component: CreateProduct },
 
   { path: "/funds/wallet", name: 'Store Wallet', component: StoreWallet },
+  { path: "/funds/bank-accounts", name: 'Bank Accounts', component: BankAccounts },
 
 
   { path: "/orders/:order_status", name: 'Store Orders', component: Orders },

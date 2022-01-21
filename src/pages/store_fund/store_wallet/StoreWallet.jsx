@@ -1,4 +1,4 @@
-import { CCard, CCardBody, CCardHeader, CRow, CCol, CWidgetIcon, CAlert, CBadge, CButton } from "@coreui/react";
+import { CCard, CCardBody, CCardHeader, CRow, CCol, CWidgetIcon, CAlert, CBadge, CButton, CContainer } from "@coreui/react";
 import Spinner from "src/components/Spinner";
 import { useSelector } from 'react-redux';
 import Money from "src/components/Money";
@@ -46,6 +46,7 @@ const StoreWallet = (props) => {
     }
     return (
         <>
+           
             <CCard>
                 <CCardHeader>
                     <h4 className="inline-block"><Spinner status={loading} /> Store Wallet</h4>
