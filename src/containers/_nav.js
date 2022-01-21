@@ -229,6 +229,41 @@ const _nav =  [
     ]
   },
   {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Store Fund',
+    route: '/funds',
+    icon: 'cil-calculator',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Store Wallet',
+        to: '/funds/wallet',
+        badge: {
+          color: 'success',
+          text: 'NEW',
+        },
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Bank Accounts',
+        to: '/funds/bank-accounts',
+        badge: {
+          color: 'success',
+          text: 'NEW',
+        },
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Withdrawal Request',
+        to: '/funds/request-withdrawal',
+        badge: {
+          color: 'success',
+          text: 'NEW',
+        },
+      },
+    ]
+  },
+  {
     _tag: 'CSidebarNavItem',
     name: 'Logout',
     to: '/logout',
@@ -238,6 +273,26 @@ const _nav =  [
       text: 'NEW',
     }
   },
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   {
     _tag: 'CSidebarNavTitle',
     _children: ['Theme']

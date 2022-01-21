@@ -14,6 +14,7 @@ import StoreReducer from "./StoreReducer";
 import StoreStaffReducer from "./StoreStaffReducer";
 import VariationOptionReducer from "./VariationOptionReducer";
 import DashboardReducer from './DashboardReducer';
+import WalletReducer from './WalletReducer';
 
 const appReducers = combineReducers({
     auth:AuthReducer,
@@ -29,7 +30,8 @@ const appReducers = combineReducers({
     shipping_group:ShippingGroupReducer,
     shipping_location:ShippingLocationReducer,
     order:OrderReducer,
-    dashboard:DashboardReducer
+    dashboard:DashboardReducer,
+    wallet:WalletReducer
 });
 
 const rootReducers = (state,action) => {
