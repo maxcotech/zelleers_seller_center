@@ -12,12 +12,15 @@ const OrderItemBtn = (props) => {
     const [visible,setVisible] = useState(false);
     const storeId = useDispatch(state => state.store.current_store.id);
     const dispatch = useDispatch();
-    const {item} = props;
+    const {sub_order_id,user_id} = props;
 
     const onBtnClick = () => {
-        const params = {
-            sub_order_id:item.id,
-            paginate:0
+        const params = {paginate:0,store_id:storeId}
+        if(sub_order_id){
+            params.sub_order_id = sub_order_id;
+        }
+        if(user_id){
+            params.user_id = user_id
         }
         dispatch(fetchOrderItems(params,setLoading,() => {
             setVisible(true);

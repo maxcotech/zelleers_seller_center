@@ -256,6 +256,16 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavItem',
+    name: 'Customers',
+    to: '/customers',
+    icon: <CIcon name="cil-user" customClasses="c-sidebar-nav-icon"/>,
+    badge: {
+      color: 'success',
+      text: 'NEW',
+    }
+  },
+  {
+    _tag: 'CSidebarNavItem',
     name: 'Logout',
     to: '/logout',
     icon: <CIcon name="cil-user-unfollow" customClasses="c-sidebar-nav-icon"/>,

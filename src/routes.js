@@ -37,6 +37,7 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
+
 const CreateStore = React.lazy(() => import('./pages/store/create_store/CreateStore'));
 const Logout = React.lazy(() => import('./pages/logout/Logout'));
 const StaffTokens = React.lazy(() => import('./pages/store/staff_tokens/StaffTokens'));
@@ -52,6 +53,7 @@ const Orders = React.lazy(() => import('./pages/orders/Orders'));
 const DashboardPage = React.lazy(() => import('./pages/dashboard/Dashboard'));
 const StoreWallet = React.lazy(() => import('./pages/store_fund/store_wallet/StoreWallet'));
 const BankAccounts = React.lazy(() => import('./pages/store_fund/bank_account/BankAccounts'));
+const CustomersPage = React.lazy(() => import('./pages/customers/Customers'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -74,6 +76,7 @@ const routes = [
   { path: "/funds/wallet", name: 'Store Wallet', component: StoreWallet },
   { path: "/funds/bank-accounts", name: 'Bank Accounts', component: BankAccounts },
 
+  { path: "/customers", name: 'Store Customers', component: CustomersPage },
 
   { path: "/orders/:order_status", name: 'Store Orders', component: Orders },
 

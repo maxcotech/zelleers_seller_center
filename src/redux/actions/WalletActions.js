@@ -1,4 +1,4 @@
-import { getService, postService } from './ActionServices';
+import { getService, postService, putService, deleteService } from './ActionServices';
 import { WALLET_ACTION_TYPES } from './../action_types/WalletActionTypes';
 import { BASE_URL } from './../../config/constants/app_constants';
 
@@ -39,5 +39,23 @@ export const createWithdrawalRequest = (data,iloader = null, onComplete = null) 
 export const createBankAccount = (data,iloader = null, onComplete = null) => {
     return (dispatch) => {
         dispatch(postService(`${BASE_URL}store/bank_account`,data,{iloader,onComplete}))
+    }
+}
+
+export const fetchBankCodes = (currency_id, iloader = null,onComplete = null) => {
+    return(dispatch) => {
+        dispatch(getService(`${BASE_URL}banks/codes/${currency_id}`,{iloader,onComplete}))
+    }
+}
+
+export const updateBankAccount = (data,iloader = null,onComplete = null) => {
+    return (dispatch) => {
+        dispatch(putService(`${BASE_URL}store/bank_account`,data,{iloader,onComplete}))
+    }
+}
+
+export const deleteBankAccount = (acctId,params = {}, iloader = null, onComplete = null) => {
+    return(dispatch) => {
+        dispatch(deleteService(`${BASE_URL}store/bank_account/${acctId}`,{params,iloader,onComplete}))
     }
 }

@@ -20,11 +20,12 @@ import { setSideBarStatus } from 'src/redux/actions/AppActions'
 import SelectCurrencyInput from 'src/components/SelectCurrencyInput'
 import { orderStatuses } from 'src/config/app_config/order_config'
 import ExpandableImage from 'src/components/ExpandableImage'
+import { getUserTypeText } from 'src/config/app_config/user_config'
 
 const TheHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector(state => state.app.sidebar)
-  const {first_name,last_name} = useSelector(state => state.auth.user);
+  const {first_name,last_name,user_type} = useSelector(state => state.auth.user);
   const toggleSidebar = () => {
     const val = [true, 'responsive'].includes(sidebarShow) ? false : 'responsive'
     dispatch(setSideBarStatus(val))
@@ -65,7 +66,9 @@ const TheHeader = () => {
 
       <CHeaderNav className="px-3">
         <CHeaderNavItem className="px-3" >
-          <CHeaderNavLink to="/dashboard"><span style={{textTransform:"capitalize",fontSize:"1.2em"}}>{first_name} {last_name}</span></CHeaderNavLink>
+          <CHeaderNavLink to="/dashboard">
+            
+            <span style={{textTransform:"capitalize",fontSize:"1.2em"}}>{first_name} {last_name} </span><pre>  </pre><div> ({getUserTypeText(user_type)})</div></CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem>
           <ExpandableImage borderRadius="50%" width="auto" height="40px" title="Avatar" src="images/avatar.jpg" />

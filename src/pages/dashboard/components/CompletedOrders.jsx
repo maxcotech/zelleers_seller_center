@@ -3,10 +3,9 @@ import { CAlert } from '@coreui/react';
 import { useSelector } from 'react-redux';
 import Money from './../../../components/Money';
 import { CBadge } from '@coreui/react';
-import { CButton } from '@coreui/react';
 import OrderItemBtn from './OrderItemBtn';
 
-const CompletedOrders = (props) => {
+const CompletedOrders = () => {
     const { data } = useSelector(state => state.dashboard)
     return (
         <>
@@ -39,7 +38,7 @@ const CompletedOrders = (props) => {
                                             <td><Money>{item.amount}</Money></td>
                                             <td><CBadge style={{fontSize:"1em"}} color={(item.payment_status == 1)? "success":"danger" }>{item.payment_status_text}</CBadge></td>
                                             <td>{item.created_at}</td>
-                                            <td><OrderItemBtn item={item} /></td>
+                                            <td><OrderItemBtn sub_order_id={item.id} /></td>
                                         </tr>
                                     ))
                                 }
