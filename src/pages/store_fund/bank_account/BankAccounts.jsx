@@ -3,8 +3,12 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import Spinner from "src/components/Spinner";
-import { fetchBankAccounts } from './../../../redux/actions/WalletActions';
+import { createBankAccount, deleteBankAccount, fetchBankAccounts } from './../../../redux/actions/WalletActions';
 import LoadingBtn from './../../../components/LoadingBtn';
+import AppModal from "src/components/AppModal";
+import BankAccountForm from "./components/BankAccountForm";
+import UpdateBankAccountBtn from "./components/UpdateBankAccountBtn";
+import { confirmAction } from 'src/config/helpers/message_helpers';
 
 
 const BankAccounts = () => {
@@ -23,6 +27,22 @@ const BankAccounts = () => {
             }
         }
         return "N/A";
+    }
+    const onCreateBankAccount = (data,iloader = null) => {
+        const formData = {...data,store_id:store.id};
+        dispatch(createBankAccount(formData,iloader,() => {
+            dispatch(fetchBankAccounts({store_id:store?.id},iloader,() => {
+                setShowCreateForm(false);
+            }))
+        }))
+    }
+    const onDeleteAccount = async (data,iloader = null) => {
+        if(await confirmAction({text:"This bank account will no longer be available for your payout."})){
+            const param = {store_id:store.id};
+            dispatch(deleteBankAccount(data,param,iloader,() => {
+                dispatch(fetchBankAccounts({store_id:store?.id}));
+            }))
+        }
     }
     useEffect(() => {
         dispatch(fetchBankAccounts({store_id:store?.id}))
@@ -67,8 +87,8 @@ const BankAccounts = () => {
                                                 <td>{(new Date(item.created_at)).toDateString()}</td>
                                                 <td>
                                                     <CButtonGroup>
-                                                        <CButton color="primary">Update</CButton>
-                                                        <LoadingBtn color="danger">Delete</LoadingBtn>
+                                                        <UpdateBankAccountBtn onComplete={() => dispatch(fetchBankAccounts({store_id:store?.id}))} item={item} />
+                                                        <LoadingBtn data={item.id} onClick={onDeleteAccount} color="danger">Delete</LoadingBtn>
                                                     </CButtonGroup>
                                                 </td>
                                             </tr>
@@ -85,6 +105,9 @@ const BankAccounts = () => {
                     }
                 </CCardBody>
             </CCard>
+            <AppModal title="Add Bank Account" show={showCreateForm} onClose={() => setShowCreateForm(false)}>
+                 <BankAccountForm submitHandler={onCreateBankAccount} />   
+            </AppModal>
         </>
     )
 }

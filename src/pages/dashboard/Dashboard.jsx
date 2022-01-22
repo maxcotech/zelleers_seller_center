@@ -56,7 +56,7 @@ const Dashboard = () => {
                     </CCol>
                     <CCol  xs="12" sm="6" lg="3">
                         <CWidgetProgressIcon
-                            header={<span><Money noSymbol={true}>{stock_data.stock_quantity}</Money> Product(s)</span>}
+                            header={<span><Money noSymbol={true}>{stock_data.total_products}</Money> Product(s)</span>}
                             text="Total Products"
                             color="gradient-info"
                             inverse
