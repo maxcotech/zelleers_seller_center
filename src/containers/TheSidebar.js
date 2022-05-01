@@ -27,7 +27,7 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch(setSideBarStatus(val))}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        <h3>ZELLER<span className="text-success">VENDOR</span></h3>
+        <h3><span className="text-success">COZELLER</span>VENDOR</h3>
         {/*<CIcon
           className="c-sidebar-brand-full"
           name="logo-negative"

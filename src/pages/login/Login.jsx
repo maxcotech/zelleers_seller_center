@@ -46,11 +46,14 @@ const Login = () => {
         <CRow className="justify-content-center">
           <CCol md="8">
             <CCardGroup>
-              <CCard className="p-4">
+              <CCard className="p-lg-4">
                 <CCardBody>
                   <CForm>
                     <h1>Login</h1>
+                    <div className="d-flex flex-row justify-content-between">
                     <p className="text-muted">Sign In to your account</p>
+                    <p className="text-right"><Link className="text-success" to="/register">Or Register</Link></p>
+                    </div>
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                         <CInputGroupText>
@@ -69,22 +72,22 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton disabled={loading} onClick={() => onSubmit()} color="primary" className="px-4"><Spinner color="text-light" status={loading} /> Login</CButton>
+                        <CButton disabled={loading} onClick={() => onSubmit()} color="success" className="px-4"><Spinner color="text-light" status={loading} /> Login</CButton>
                       </CCol>
                       <CCol xs="6" className="text-right">
-                        <CButton href="/forgot-password" color="link" className="px-0">Forgot password?</CButton>
+                        <Link href="/forgot-password"  className="text-success px-0">Forgot password?</Link>
                       </CCol>
                     </CRow>
                   </CForm>
                 </CCardBody>
               </CCard>
-              <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
+              <CCard className="text-white bg-success py-5 d-md-down-none" style={{ width: '44%' }}>
                 <CCardBody className="text-center">
                   <div>
                     <h2>Sign up</h2>
                     <p>If you had no previous account with us or you had either customer account or store worker/manager account and now you wish to own a store account.</p>
                     <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
+                      <CButton color="success" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
                     </Link>
                   </div>
                 </CCardBody>

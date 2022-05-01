@@ -62,8 +62,8 @@ const Register = () => {
       <CContainer>
         <CRow className="justify-content-center">
           <CCol md="9" lg="7" xl="6">
-            <CCard className="mx-4">
-              <CCardBody className="p-4">
+            <CCard className="mx-lg-4 mt-4">
+              <CCardBody className="p-lg-4">
                 <CForm>
                   <h1>Register</h1>
                   <p className="text-muted">Create your account</p>
