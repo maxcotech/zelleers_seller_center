@@ -7,6 +7,7 @@ import { fetchUser } from './redux/actions/AuthActions';
 import 'react-toastify/dist/ReactToastify.css';
 import './scss/style.scss';
 import axios from 'axios';
+import LoadingPage from './components/LoadingPage';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -42,7 +43,7 @@ const App = (props) => {
   return (
     <HashRouter>
       <ToastContainer />
-      <React.Suspense fallback={loading}>
+      <React.Suspense fallback={<LoadingPage />}>
         <Switch>
           <Route exact path="/login" name="Login Page" render={props => <Login {...props} />} />
           <Route exact path="/register" name="Register Page" render={props => <Register {...props} />} />
