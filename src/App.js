@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import './scss/style.scss';
 import axios from 'axios';
 import LoadingPage from './components/LoadingPage';
+import { ipFetchUrl } from './config/constants/app_constants';
+import { getCookie, isCookieSet, setCookie } from './config/helpers/cookie_helpers';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -32,9 +34,26 @@ const App = (props) => {
   const store = useSelector(state => state.store);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const getUserIpPayload = async () => {
+    if(isCookieSet("ip_payload")){
+      const cookiev = getCookie("ip_payload");
+      console.log("Via cookies",cookiev);
+      return cookiev;
+    } else {
+      const res = await axios.get(ipFetchUrl, {withCredentials: false});
+      console.log(res);
+      const finalRes = JSON.stringify(res.data);
+      setCookie("ip_payload",finalRes,1);
+      return finalRes;
+    }
+    
+  }
+
+  useEffect(async () => {
     console.log('App initialized. Fetching user...');
     axios.defaults.withCredentials = true;
+    axios.defaults.headers["X-client-ip-payload"] = await getUserIpPayload()
+    
     if (dispatch && auth.init === false) {
       dispatch(fetchUser());
     }
