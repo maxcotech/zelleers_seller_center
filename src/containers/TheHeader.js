@@ -80,7 +80,7 @@ const TheHeader = () => {
           className="border-0 c-subheader-nav m-0 px-0 px-md-3" 
           routes={routes} 
         />
-          <div className=" mfe-2 c-subheader-nav">
+          <div className="c-subheader-nav">
             <SelectCurrencyInput />
           </div>
       </CSubheader>
