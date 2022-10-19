@@ -84,6 +84,16 @@ const VariationOptionForm = (props) => {
         if(props.onComplete) props.onComplete();
     }
 
+    const onVariationCount = (e) => {
+        const val = e.target.value;
+        const parsedVal = parseInt(val);
+        if(parsedVal === NaN){
+            setVariationCount(0);
+        } else {
+            setVariationCount(parsedVal);
+        }
+    }
+
     return (
         <>
             <CCard>
@@ -108,7 +118,7 @@ const VariationOptionForm = (props) => {
                     }
                     <CFormGroup>
                         <CLabel>Number of variations</CLabel>
-                        <input value={variationCount} onChange={(e) => (e.target.value >= 1)? setVariationCount(e.target.value):false} type="number" className="form-control" />
+                        <input value={variationCount} onChange={onVariationCount} type="number" className="form-control" />
                     </CFormGroup>
                     <CFormGroup>
                         <CButton onClick={onGenerateVariations} block={true} color="primary">Generate Variations</CButton>
