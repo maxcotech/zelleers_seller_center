@@ -45,8 +45,9 @@ const FileUploadComponent = (props) => {
                 </CCardBody>
                 {
                     (props.caption === null || props.caption === "")?<></>:
-                        <CCardFooter>
+                        <CCardFooter style={{display:props.subText?"flex":"block", justifyContent:'space-between'}}>
                             <p className="text-center">{props.caption ?? "No Caption"}</p>
+                            {props.subText?props.subText:<></>}
                         </CCardFooter>
                 }
                

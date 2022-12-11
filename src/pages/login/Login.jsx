@@ -39,7 +39,8 @@ const Login = () => {
   }
 
   const onSubmit = () => {
-    dispatch(loginUser(formState, () => {
+    dispatch(loginUser(formState, (data) => {
+      localStorage.setItem("cozeller_token", data?.token);
       history.push('/dashboard')
     }))
   }

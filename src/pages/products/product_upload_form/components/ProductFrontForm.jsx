@@ -34,6 +34,7 @@ const ProductFrontForm = (props) => {
                             id="product_image"
                             onFileChanged={(file,loader) => dispatch(uploadMainProductImage(file,loader))}
                             caption="Main Image"
+                            subText={<span style={{paddingTop:'5px',color:'red',fontSize:'11px'}}>Required</span>}
                             file_path={current_product.product_image}
                         />
                     </CCol>
@@ -41,11 +42,13 @@ const ProductFrontForm = (props) => {
                         <div>
                             <form ref={props.productFrontFormRef}>
                             <CFormGroup>
-                                <CLabel>Product Name<span className="text-danger">*</span></CLabel>
+                                <CLabel style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>Product Name<span className="text-danger" style={{fontSize:'11px'}}>Required</span></CLabel>
                                 <input onBlur={(e) => dispatch(setProductAttribute(e.target.value,"product_name"))}  className="form-control" ref={productNameRef} placeholder="Eg: Apple Macbook Pro 2021 mi" />
                             </CFormGroup>
                             <CFormGroup>
-                                <CLabel>Regular Price in ({currency_name})<span className="text-danger">*</span></CLabel>
+                            <CLabel style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>Regular Price in ({currency_name})<span className="text-danger" style={{fontSize:'11px'}}>Required</span></CLabel>
+
+                                {/* <CLabel>Regular Price in ({currency_name})<span className="text-danger">*</span></CLabel> */}
                                 <CInputGroup>
                                     <CInputGroupPrepend>
                                         <CInputGroupText>
@@ -67,11 +70,11 @@ const ProductFrontForm = (props) => {
                                 </CInputGroup>
                             </CFormGroup>
                             <CFormGroup>
-                                <CLabel>Amount In Stock</CLabel>
+                            <CLabel style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>Amount in stock<span className="text-danger" style={{fontSize:'11px'}}>Required</span></CLabel>
                                 <input onBlur={(e) => dispatch(setProductAttribute(e.target.value,"amount_in_stock"))}  className="form-control" type="number" ref={amountInStockRef} placeholder="Enter Amount of product in stock" />
                             </CFormGroup>
                             <CFormGroup>
-                                <CLabel>Category</CLabel>
+                            <CLabel style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>Category<span className="text-danger" style={{fontSize:'11px'}}>Required</span></CLabel>
                                 <CInputGroup>
                                     <CInputGroupPrepend>
                                         <ProductCategorySelect 

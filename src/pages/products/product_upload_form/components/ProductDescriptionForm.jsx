@@ -21,6 +21,8 @@ const ProductDescriptionForm = (props) => {
                         <CCard>
                             <CCardHeader>
                                 <h5>Simple Description</h5>
+                                <span style={{color:'red',fontSize:'11px'}}>Required</span> 
+                                <p>Provide a short information about this product</p>
                             </CCardHeader>
                             <CCardBody>
                                 <JoditEditor 
@@ -39,6 +41,9 @@ const ProductDescriptionForm = (props) => {
                         <CCard>
                             <CCardHeader>
                                 <h5>Exhausive Description</h5>
+                                <span style={{color:'grey',fontSize:'11px'}}>Optional</span> 
+                                <p>Describe everything about your product</p>
+
                             </CCardHeader>
                             <CCardBody>
                                 <JoditEditor 
@@ -55,8 +60,12 @@ const ProductDescriptionForm = (props) => {
                 <CRow>
                     <CCol lg={12}>
                         <CCard>
-                            <CCardHeader><h5>Key Features</h5></CCardHeader>
-                            <CCardBody>
+                        <CCardHeader>
+                                <h5>Key Features</h5>
+                                <span style={{color:'grey',fontSize:'11px'}}>Optional</span> 
+                                <p>List out important attributes of this product eg: "Condition" = "fairly used, new, used". Preferably in a list format</p>
+                            </CCardHeader>
+                                                        <CCardBody>
                                 <JoditEditor 
                                     config={joditConfig}
                                     ref={props.keyFeaturesRef}
