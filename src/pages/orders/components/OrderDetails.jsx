@@ -40,10 +40,10 @@ const OrderDetails = (props) => {
                 </CCardHeader>
                 <CCardBody>
                     <CRow>
-                        <CCol>
+                        <CCol xs={12} lg={6}>
                             <ShippingAddressCard billing_address={order.order.billing_address} />
                         </CCol>
-                        <CCol>
+                        <CCol xs={12} lg={6}>
                             <CustomerDetailsCard user={order.user} billing_address={order.order.billing_address} />
                         </CCol>
                     </CRow>

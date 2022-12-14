@@ -59,7 +59,7 @@ const ProductFrontForm = (props) => {
                                 </CInputGroup>
                             </CFormGroup>
                             <CFormGroup>
-                                <CLabel>Sales Price in ({currency_name})</CLabel>
+                            <CLabel style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>Sales Price in ({currency_name})<span className="text-muted" style={{fontSize:'11px'}}>Optional</span></CLabel>
                                 <CInputGroup>
                                     <CInputGroupPrepend>
                                         <CInputGroupText>

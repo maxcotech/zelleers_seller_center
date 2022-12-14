@@ -18,6 +18,7 @@ const ProductGalleryForm = (props) => {
                             id="front_image"
                             onFileChanged={(file,loader) => dispatch(uploadGalleryImage(file,"front_image",loader))}
                             caption="Front Image"
+                            subText={<span style={{paddingTop:'5px',color:'red',fontSize:'11px'}}>Required</span>}
                             file_path={current_product.front_image}
                 
                         />
@@ -27,6 +28,7 @@ const ProductGalleryForm = (props) => {
                             id="back_image"
                             onFileChanged={(file,loader) => dispatch(uploadGalleryImage(file,"back_image",loader))}
                             caption="Back Image"
+                            subText={<span style={{paddingTop:'5px',color:'red',fontSize:'11px'}}>Required</span>}
                             file_path={current_product.back_image}
                         />
                     </CCol>
@@ -35,6 +37,7 @@ const ProductGalleryForm = (props) => {
                             id="side_image"
                             onFileChanged={(file,loader) => dispatch(uploadGalleryImage(file,"side_image",loader))}
                             caption="Side Image"
+                            subText={<span style={{paddingTop:'5px',color:'red',fontSize:'11px'}}>Required</span>}
                             file_path={current_product.side_image}
                         />
                     </CCol>
@@ -43,6 +46,7 @@ const ProductGalleryForm = (props) => {
                             id="fourth_image"
                             onFileChanged={(file,loader) => dispatch(uploadGalleryImage(file,"fourth_image",loader))}
                             caption="Fourth Image"
+                            subText={<span style={{paddingTop:'5px',color:'grey',fontSize:'11px'}}>Optional</span>}
                             file_path={current_product.fourth_image}
                         />
                     </CCol>
@@ -51,6 +55,7 @@ const ProductGalleryForm = (props) => {
                             id="fifth_image"
                             onFileChanged={(file,loader) => dispatch(uploadGalleryImage(file,"fifth_image",loader))}
                             caption="Fifth Image"
+                            subText={<span style={{paddingTop:'5px',color:'grey',fontSize:'11px'}}>Optional</span>}
                             file_path={current_product.fifth_image}
 
                         />

@@ -48,6 +48,11 @@ const ProductVariationForm = (props) => {
                     <div className="text-center">
                         <p>There is no variation available for this product</p>
                         <div><CButton color="primary" onClick={() => setVisible(true)}>Create Variations</CButton></div>
+                        <div style={{marginTop:'20px',color:'red', fontWeight:'bold'}}>Please read</div>
+                        <div style={{ textAlign:'left'}}>
+                            Variations is a way of identifying different forms of your product especially when they are of different prices, for instance black color is a form different from red color, size 45 is a form different from size 42,
+                            you can also have red shoe of size 45 as a different variation from red shoe size 42.
+                        </div>
 
                     </div>
                 }

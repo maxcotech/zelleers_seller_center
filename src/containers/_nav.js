@@ -1,298 +1,267 @@
-import React from 'react'
-import CIcon from '@coreui/icons-react'
-import { orderStatuses } from 'src/config/app_config/order_config'
+import React from "react";
+import CIcon from "@coreui/icons-react";
+import { orderStatuses } from "src/config/app_config/order_config";
 
-const _nav =  [
+const _nav = [
   {
-    _tag: 'CSidebarNavItem',
-    name: 'Dashboard',
-    to: '/dashboard',
-    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
+    _tag: "CSidebarNavItem",
+    name: "Dashboard",
+    to: "/dashboard",
+    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
     badge: {
-      color: 'success',
-      text: 'NEW',
-    }
+      color: "success",
+      text: "NEW",
+    },
   },
   {
-    _tag: 'CSidebarNavDropdown',
-    name: 'Products',
-    route: '/product',
-    icon: 'cil-puzzle',
+    _tag: "CSidebarNavDropdown",
+    name: "Products",
+    route: "/product",
+    icon: "cil-puzzle",
     _children: [
       {
-        _tag: 'CSidebarNavItem',
-        name: 'Create Product',
-        to: '/product/create',
+        _tag: "CSidebarNavItem",
+        name: "Create Product",
+        to: "/product/create",
         badge: {
-          text:"NEW",
-          color:"success"
-        }
+          text: "NEW",
+          color: "success",
+        },
       },
       {
-        _tag: 'CSidebarNavItem',
-        name: 'View Products',
-        to: '/products',
+        _tag: "CSidebarNavItem",
+        name: "View Products",
+        to: "/products",
         badge: {
-          text:"NEW",
-          color:"success"
-        }
-      }
-    ]
+          text: "NEW",
+          color: "success",
+        },
+      },
+    ],
   },
   {
-    _tag: 'CSidebarNavDropdown',
-    name: 'Store Orders',
-    route: '/orders',
-    icon: 'cil-basket',
+    _tag: "CSidebarNavDropdown",
+    name: "Store Orders",
+    route: "/orders",
+    icon: "cil-basket",
     _children: [
       {
-        _tag: 'CSidebarNavItem',
-        name: 'Awaiting fulfillment',
+        _tag: "CSidebarNavItem",
+        name: "Awaiting fulfillment",
         to: `/orders/${orderStatuses.AWAITING_FULFILLMENT}`,
         badge: {
-          text:"NEW",
-          color:"success"
-        }
+          text: "NEW",
+          color: "success",
+        },
       },
       {
-        _tag: 'CSidebarNavItem',
-        name: 'Awaiting Shipping',
+        _tag: "CSidebarNavItem",
+        name: "Awaiting Shipping",
         to: `/orders/${orderStatuses.AWAITING_SHIPPING}`,
         badge: {
-          text:"NEW",
-          color:"success"
-        }
+          text: "NEW",
+          color: "success",
+        },
       },
       {
-        _tag: 'CSidebarNavItem',
-        name: 'Partially Shipped',
+        _tag: "CSidebarNavItem",
+        name: "Partially Shipped",
         to: `/orders/${orderStatuses.PARTIALLY_SHIPPED}`,
         badge: {
-          text:"NEW",
-          color:"success"
-        }
+          text: "NEW",
+          color: "success",
+        },
       },
       {
-        _tag: 'CSidebarNavItem',
-        name: 'Shipped Orders',
+        _tag: "CSidebarNavItem",
+        name: "Shipped Orders",
         to: `/orders/${orderStatuses.SHIPPED}`,
         badge: {
-          text:"NEW",
-          color:"success"
-        }
+          text: "NEW",
+          color: "success",
+        },
       },
       {
-        _tag: 'CSidebarNavItem',
-        name: 'Awaiting Pickup',
+        _tag: "CSidebarNavItem",
+        name: "Awaiting Pickup",
         to: `/orders/${orderStatuses.AWAITING_PICKUP}`,
         badge: {
-          text:"NEW",
-          color:"success"
-        }
+          text: "NEW",
+          color: "success",
+        },
       },
       {
-        _tag: 'CSidebarNavItem',
-        name: 'Completed Orders',
+        _tag: "CSidebarNavItem",
+        name: "Completed Orders",
         to: `/orders/${orderStatuses.COMPLETED}`,
         badge: {
-          text:"NEW",
-          color:"success"
-        }
+          text: "NEW",
+          color: "success",
+        },
       },
       {
-        _tag: 'CSidebarNavItem',
-        name: 'Cancelled Orders',
+        _tag: "CSidebarNavItem",
+        name: "Cancelled Orders",
         to: `/orders/${orderStatuses.CANCELLED}`,
         badge: {
-          text:"NEW",
-          color:"success"
-        }
+          text: "NEW",
+          color: "success",
+        },
       },
       {
-        _tag: 'CSidebarNavItem',
-        name: 'Disputed Orders',
+        _tag: "CSidebarNavItem",
+        name: "Disputed Orders",
         to: `/orders/${orderStatuses.DISPUTED}`,
         badge: {
-          text:"NEW",
-          color:"success"
-        }
+          text: "NEW",
+          color: "success",
+        },
       },
       {
-        _tag: 'CSidebarNavItem',
-        name: 'Awaiting Refund',
+        _tag: "CSidebarNavItem",
+        name: "Awaiting Refund",
         to: `/orders/${orderStatuses.AWAITING_REFUND}`,
         badge: {
-          text:"NEW",
-          color:"success"
-        }
+          text: "NEW",
+          color: "success",
+        },
       },
       {
-        _tag: 'CSidebarNavItem',
-        name: 'Refunded',
+        _tag: "CSidebarNavItem",
+        name: "Refunded",
         to: `/orders/${orderStatuses.REFUNDED}`,
         badge: {
-          text:"NEW",
-          color:"success"
-        }
-      }
-
-      
-    ]
+          text: "NEW",
+          color: "success",
+        },
+      },
+    ],
   },
   {
-    _tag: 'CSidebarNavDropdown',
-    name: 'Store Settings',
-    route: '/store',
-    icon: 'cil-settings',
+    _tag: "CSidebarNavDropdown",
+    name: "Store Settings",
+    route: "/store",
+    icon: "cil-settings",
     _children: [
       {
-        _tag: 'CSidebarNavItem',
-        name: 'Create Store',
-        to: '/store/create',
+        _tag: "CSidebarNavItem",
+        name: "Create Store",
+        to: "/store/create",
         badge: {
-          text:"NEW",
-          color:"success"
-        }
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Join Store',
-        to: '/store/join',
-        badge: {
-          text:"NEW",
-          color:"success"
-        }
-      },
-      {
-        _tag:'CSidebarNavItem',
-        name: 'Store Staffs',
-        to: '/store/staffs',
-        badge: {
-          text:"NEW",
-          color:"success"
-        }
-      },
-      {
-        _tag:'CSidebarNavItem',
-        name: 'Store Staff Tokens',
-        to: '/store/staff-tokens',
-        badge: {
-          text:"NEW",
-          color:"success"
-        }
-      },
-      {
-        _tag:'CSidebarNavItem',
-        name: 'Select Store',
-        to: '/store/select',
-        badge: {
-          text:"NEW",
-          color:"success"
-        }
-      },
-      {
-        _tag:'CSidebarNavItem',
-        name: 'Edit Store',
-        to: '/store/update',
-        badge: {
-          text:"NEW",
-          color:"success"
-        }
-      }
-    ]
-  },
-  {
-    _tag: 'CSidebarNavDropdown',
-    name: 'Manage Shipping',
-    route: '/store',
-    icon: 'cil-settings',
-    _children: [
-      {
-        _tag:'CSidebarNavItem',
-        name: 'Shipping Groups',
-        to: '/shipping/groups',
-        badge: {
-          text:"NEW",
-          color:"success"
-        }
-      },
-      {
-        _tag:'CSidebarNavItem',
-        name: 'Payments',
-        to: '/payment/init',
-        badge: {
-          text:"NEW",
-          color:"success"
-        }
-      }
-
-    ]
-  },
-  {
-    _tag: 'CSidebarNavDropdown',
-    name: 'Store Fund',
-    route: '/funds',
-    icon: 'cil-calculator',
-    _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Store Wallet',
-        to: '/funds/wallet',
-        badge: {
-          color: 'success',
-          text: 'NEW',
+          text: "NEW",
+          color: "success",
         },
       },
       {
-        _tag: 'CSidebarNavItem',
-        name: 'Bank Accounts',
-        to: '/funds/bank-accounts',
+        _tag: "CSidebarNavItem",
+        name: "Join Store",
+        to: "/store/join",
         badge: {
-          color: 'success',
-          text: 'NEW',
+          text: "NEW",
+          color: "success",
         },
-      }
-    ]
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Store Staffs",
+        to: "/store/staffs",
+        badge: {
+          text: "NEW",
+          color: "success",
+        },
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Store Staff Tokens",
+        to: "/store/staff-tokens",
+        badge: {
+          text: "NEW",
+          color: "success",
+        },
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Select Store",
+        to: "/store/select",
+        badge: {
+          text: "NEW",
+          color: "success",
+        },
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Edit Store",
+        to: "/store/update",
+        badge: {
+          text: "NEW",
+          color: "success",
+        },
+      },
+    ],
   },
   {
-    _tag: 'CSidebarNavItem',
-    name: 'Customers',
-    to: '/customers',
-    icon: <CIcon name="cil-user" customClasses="c-sidebar-nav-icon"/>,
-    badge: {
-      color: 'success',
-      text: 'NEW',
-    }
+    _tag: "CSidebarNavDropdown",
+    name: "Manage Shipping",
+    route: "/store",
+    icon: "cil-settings",
+    _children: [
+      {
+        _tag: "CSidebarNavItem",
+        name: "Shipping Groups",
+        to: "/shipping/groups",
+        badge: {
+          text: "NEW",
+          color: "success",
+        },
+      },
+    ],
   },
   {
-    _tag: 'CSidebarNavItem',
-    name: 'Logout',
-    to: '/logout',
-    icon: <CIcon name="cil-user-unfollow" customClasses="c-sidebar-nav-icon"/>,
-    badge: {
-      color: 'success',
-      text: 'NEW',
-    }
+    _tag: "CSidebarNavDropdown",
+    name: "Store Fund",
+    route: "/funds",
+    icon: "cil-calculator",
+    _children: [
+      {
+        _tag: "CSidebarNavItem",
+        name: "Store Wallet",
+        to: "/funds/wallet",
+        badge: {
+          color: "success",
+          text: "NEW",
+        },
+      },
+      {
+        _tag: "CSidebarNavItem",
+        name: "Bank Accounts",
+        to: "/funds/bank-accounts",
+        badge: {
+          color: "success",
+          text: "NEW",
+        },
+      },
+    ],
   },
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  {
+    _tag: "CSidebarNavItem",
+    name: "Customers",
+    to: "/customers",
+    icon: <CIcon name="cil-user" customClasses="c-sidebar-nav-icon" />,
+    badge: {
+      color: "success",
+      text: "NEW",
+    },
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Logout",
+    to: "/logout",
+    icon: <CIcon name="cil-user-unfollow" customClasses="c-sidebar-nav-icon" />,
+    badge: {
+      color: "success",
+      text: "NEW",
+    },
+  },
 
   // {
   //   _tag: 'CSidebarNavTitle',
@@ -589,6 +558,6 @@ const _nav =  [
   //   _tag: 'CSidebarNavDivider',
   //   className: 'm-2'
   // }
-]
+];
 
-export default _nav
+export default _nav;

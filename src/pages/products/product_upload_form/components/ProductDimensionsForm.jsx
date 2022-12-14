@@ -28,7 +28,7 @@ const ProductDimensionsForm = (props) => {
                         <div>
                             <form ref={props.dimensionsFormRef}>
                             <CAlert color="info">
-                                Here it's either you select weight, or select length, height and width ( you can still select all if you wish).
+                                Here it's either you select weight, or select length, height and width ( you can still select all if you wish). <span style={{color:"red"}}>Please be sure to provide either of the two before you proceed</span>
                             </CAlert>
                             <CFormGroup>
                                 <CLabel>Product Weight</CLabel>
