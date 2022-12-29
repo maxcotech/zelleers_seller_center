@@ -47,7 +47,7 @@ const ProductAttributesForm = (props) => {
                     <CCol lg={{offset:2,size:8}}>
                         <form ref={props.otherAttributesFormRef}>
                         <CFormGroup>
-                            <CLabel>Youtube Video</CLabel>
+                        <CLabel style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>Youtube video<span className="text-muted" style={{fontSize:'11px'}}>Optional</span></CLabel>
                             <input 
                                 className="form-control"
                                 ref={youtubeVideoRef}
@@ -56,7 +56,7 @@ const ProductAttributesForm = (props) => {
                             />
                         </CFormGroup>
                         <CFormGroup>
-                            <CLabel>Product Sku</CLabel>
+                        <CLabel style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>Product SKU<span className="text-danger" style={{fontSize:'11px'}}>Optional</span></CLabel>
                             <input 
                                 className="form-control"
                                 onBlur={(e) => dispatch(setProductAttribute(e.target.value,"product_sku"))}
@@ -65,9 +65,9 @@ const ProductAttributesForm = (props) => {
                             />
                         </CFormGroup>
                         <CFormGroup>
-                            <CLabel>Brand Name</CLabel>
+                        <CLabel style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>Brand name<span className="text-muted" style={{fontSize:'11px'}}>Optional</span></CLabel>
                             <input onChange={onBrandChange} ref={brandRef} className="form-control" placeholder="Enter Brand Name" />
-                            <small>Could not find the approprate brand? <span onClick={()=>setModalVisible(true)} style={{cursor:"pointer"}} className="text-primary">propose a brand </span></small>
+                            <small>Could not find the appropriate brand? <span onClick={()=>setModalVisible(true)} style={{cursor:"pointer"}} className="text-primary">propose a brand </span></small>
                             <BrandSearchTable 
                                 onSelectBrand={onSelectBrand}
                                 list={brandList} />

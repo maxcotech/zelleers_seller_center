@@ -63,7 +63,9 @@ const App = (props) => {
     console.log("App initialized. Fetching user...");
     axios.defaults.withCredentials = true;
     axios.defaults.headers["X-client-ip-payload"] = await getUserIpPayload();
-    axios.defaults.headers.authorization = `Bearer ${token}`;
+    if (token) {
+      axios.defaults.headers.authorization = `Bearer ${token}`;
+    }
     // axios.interceptors.request.use((configs) => {
     //   configs.headers.authorization = `Bearer ${token}`
     // })
