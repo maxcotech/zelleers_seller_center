@@ -210,6 +210,7 @@ export const logoutUser = () => {
       .then((result) => {
         if (result.data?.status === "success") {
           dispatch(setLogoutUser());
+          localStorage.removeItem("cozeller_token");
         } else {
           result.data?.message
             ? handleArrayMessage(result.data.message, toast.error)
